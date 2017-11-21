@@ -13,7 +13,7 @@ A dead simple way to add rich and adaptive animations to your app which is alrea
 * [Usage](#usage)
     * [Functions](#functions)
     * [Options](#options)
-        * [Animation](#animation)
+        * [Animations](#animations)
         * [Advanced](#advanced)
         * [Example](#example)
     * [Inline animations](#inline-animations)
@@ -67,7 +67,7 @@ turbolinksAnimateDisappear();
 
 There are a number of ways in which you can adopt turbolinks-animate.js to your needs:
 
-#### Animation
+#### Animations
 
 The vital part is choosing an animation to play. turbolinks-animate.js utilizes Animate.css to power them. These are the animations which are currently accessible:
 
