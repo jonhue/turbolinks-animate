@@ -11,8 +11,13 @@ A dead simple way to add rich and adaptive animations to your app which is alrea
 
 * [Information](#information)
 * [Usage](#usage)
+    * [Functions](#functions)
     * [Options](#options)
-    * [Styles](#styles)
+        * [Animation](#animation)
+        * [Advanced](#advanced)
+        * [Example](#example)
+    * [Inline animations](#inline-animations)
+    * [Rails](#rails)
 * [To Do](#to-do)
 * [Contributing](#contributing)
     * [Contributors](#contributors)
@@ -31,75 +36,117 @@ A dead simple way to add rich and adaptive animations to your app which is alrea
 
 ## Usage
 
-turbolinks-animate.js is simple to use and does not require a lot of markup:
+First you need to add [jQuery](https://github.com/jquery/jquery), [Turbolinks](https://github.com/turbolinks/turbolinks) and [Animate.css](https://github.com/daneden/animate.css) to your project, then initialize turbolinks-animate.js:
 
 ```javascript
-$(function() {
-    $('body').turbolinksAnimate({ 'close': true });
+document.addEventListener( 'turbolinks:load', function() {
+    $('body').turbolinksAnimate();
+    turbolinksAnimateAppear();
+});
+document.addEventListener( 'turbolinks:request-start', function() {
+    turbolinksAnimateDisappear();
+});
+$(window).bind( 'popstate', function(event) {
+    turbolinksAnimateDisappear();
 });
 ```
 
-```html
-<body data-welcomer-content="Say hello to Welcomer.js" data-welcomer-link="View on GitHub" data-welcomer-href="https://github.com/slooob/welcomer.js">
-</body>
-```
+**Note:** You can only use `turbolinksAnimate()` for one element at a time.
 
 ### Functions
 
 ```javascript
-// Shows welcomer
-welcomerAppear($('.welcomer'));
+// Shows the initialized element
+turbolinksAnimateAppear();
 
-// Hides welcomer
-welcomerDisppear($('.welcomer'));
-
-// Hides welcomer in 5 seconds unless it is hovered
-welcomerAutoclose($('.welcomer'), 5000);
+// Hides the initialized element
+turbolinksAnimateDisappear();
 ```
 
 ### Options
 
-Welcomer.js adopts well to your site. You have bunch of configuration options:
+There are a number of ways in which you can adopt turbolinks-animate.js to your needs:
 
-* HTML:
-    * `data-welcomer-content`: The primary text. Accepts string.
-    * `data-welcomer-mobile-content`: An alternative text used for screen sizes < `750px`. Accepts string.
-    * `data-welcomer-link`: Call-to-action caption. Requires `data-welcomer-href`. Accepts string.
-    * `data-welcomer-mobile-link`: Call-to-action caption used for screen sizes < `750px`. Requires `data-welcomer-href`. Accepts string.
-    * `data-welcomer-href`: Call-to-action target location. Requires `data-welcomer-link`. Accepts string.
-* JavaScript:
-    * `newTab`: If `true`, opens call-to-action target location in a new tab. Accepts `true` or `false`. Defaults to `false`.
-    * `close`: Whether a close button is included. Accepts `true` or `false`. Defaults to `true`.
-    * `autoclose`: Milliseconds after which the welcomer automatically disappears. Accepts an integer or `false`. Defaults to `false`.
-    * `delay`: Milliseconds after which welcomer opens. Accepts an integer. Defaults to `1000`.
+#### Animation
 
-### Styles
+The vital part is choosing an animation to play. turbolinks-animate.js utilizes Animate.css to power them. These are the animations which are currently accessible:
 
-You can find the project's [`sass` file](https://github.com/slooob/welcomer.js/blob/master/welcomer.sass) under the root directory. If you want to modify it to integrate Welcomer.js better into your site, feel free to download and edit it. Then embed the edited version on your site.
+* fadeIn
+* fadeInUp
+* fadeInDown
+* fadeInRight
+* fadeInLeft
+* fadeOut
+* fadeOutUp
+* fadeOutDown
+* fadeOutRight
+* fadeOutLeft
+
+There are three ways in which you can specify the animation you want to use. To choose a globally used animation pass an option when initializing turbolinks-animate.js:
+
+```javascript
+$('body').turbolinksAnimate({ animation: 'fadeinright' });
+```
+
+**Note:** The option falls back to `fadein`.
+**Note:** As a global choice you would only want to use appearing animations, as they will get reversed automatically when the current view disappears.
+
+For alternate approaches take a look at [Inline animations](#inline-animations) and animations for [Rails](#rails).
+
+#### Advanced
+
+**duration:** CSS value for `animation-duration`. Accepts a string. Defaults to `0.5s`.
+**delay:** Milliseconds after which animation starts. Accepts an integer or `false`. Defaults to `false`.
+**reversedDisappearing:** Whether or not a reversed animation should be used when disappearing. Accepts a boolean. Defaults to `true`.
+
+#### Example
+
+```javascript
+$('body').turbolinksAnimate({ animation: 'fadeinright', duration: '1s', delay: 1000 });
+```
+
+### Inline animations
+
+With turbolinks-animate.js you are able to set animations based on the links, who got clicked:
+
+```html
+<a href="" data-turbolinks-animate-animation="fadeout" data-turbolinks-animate-duration="0.3s" data-turbolinks-animate-delay="250">I am a link!</a>
+```
+
+### Rails
+
+A lot of times with frameworks like Ruby on Rails you want to be able to specify animations from within your controllers and views without nasty javascript nesting.
+
+With turbolinks-animate.js you can just add a class to your initialized element, naming the animation you want to use. It will override the global default:
+
+```html
+<body class="turbolinks-animate--fadeinup"></body>
+```
 
 ---
 
 ## To Do
 
-* Leave your suggestions [here](https://github.com/slooob/welcomer.js/issues/new)
+* Add more animations from [Animate.css](https://github.com/daneden/animate.css)
+* Leave your suggestions [here](https://github.com/slooob/turbolinks-animate.js/issues/new)
 
 ---
 
 ## Contributing
 
-We hope that you will consider contributing to Welcomer.js. Please read this short overview for some information about how to get started:
+We hope that you will consider contributing to turbolinks-animate.js. Please read this short overview for some information about how to get started:
 
-[Learn more about contributing to this repository](https://github.com/slooob/welcomer.js/blob/master/CONTRIBUTING.md), [Code of Conduct](https://github.com/slooob/welcomer.js/blob/master/CODE_OF_CONDUCT.md)
+[Learn more about contributing to this repository](https://github.com/slooob/turbolinks-animate.js/blob/master/CONTRIBUTING.md), [Code of Conduct](https://github.com/slooob/turbolinks-animate.js/blob/master/CODE_OF_CONDUCT.md)
 
 ### Contributors
 
 Give the people some :heart: who are working on this project. See them all at:
 
-https://github.com/slooob/welcomer.js/graphs/contributors
+https://github.com/slooob/turbolinks-animate.js/graphs/contributors
 
 ### Semantic Versioning
 
-Welcomer.js follows Semantic Versioning 2.0 as defined at http://semver.org.
+turbolinks-animate.js follows Semantic Versioning 2.0 as defined at http://semver.org.
 
 ## License
 

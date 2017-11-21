@@ -1,6 +1,6 @@
 /**!
  * @fileOverview turbolinks-animate.js - Animations extending Turbolinks
- * @version 1.0.1
+ * @version 1.0.2
  * @license
  * MIT License
  *
@@ -101,6 +101,11 @@ function turbolinksAnimateGetClassListFor(animation, disappears) {
     else if (animation == 'fadeinup') { classList += (disappears ? (turbolinksAnimateData['reversedDisappearing'] ? ' fadeOutDown' : ' fadeOutUp') : ' fadeInUp') }
     else if (animation == 'fadeindown') { classList += (disappears ? (turbolinksAnimateData['reversedDisappearing'] ? ' fadeOutUp' : ' fadeOutDown') : ' fadeInDown') }
     else if (animation == 'fadeinleft') { classList += (disappears ? ' fadeOutLeft' : ' fadeInLeft') }
-    else if (animation == 'fadeinright') { classList += (disappears ? ' fadeOutRight' : ' fadeInRight') };
+    else if (animation == 'fadeinright') { classList += (disappears ? ' fadeOutRight' : ' fadeInRight') }
+    else if (animation == 'fadeout') { classList += ' fadeOut' }
+    else if (animation == 'fadeoutup') { classList += (turbolinksAnimateData['reversedDisappearing'] ? ' fadeOutDown' : ' fadeOutUp') }
+    else if (animation == 'fadeoutdown') { classList += (turbolinksAnimateData['reversedDisappearing'] ? ' fadeOutUp' : ' fadeOutDown') }
+    else if (animation == 'fadeoutleft') { classList += ' fadeOutLeft' }
+    else if (animation == 'fadeoutright') { classList += ' fadeOutRight' };
     return classList;
 };
