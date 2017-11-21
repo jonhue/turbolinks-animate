@@ -36,7 +36,7 @@ A dead simple way to add rich and adaptive animations to your app which is alrea
 
 ## Usage
 
-First you need to add [jQuery](https://github.com/jquery/jquery), [Turbolinks](https://github.com/turbolinks/turbolinks) and [Animate.css](https://github.com/daneden/animate.css) to your project, then initialize turbolinks-animate.js:
+First you need to add [turbolinks-animate.js](https://www.npmjs.com/package/turbolinks-animate), and its dependencies to your project, then initialize turbolinks-animate.js:
 
 ```javascript
 document.addEventListener( 'turbolinks:load', function() {
