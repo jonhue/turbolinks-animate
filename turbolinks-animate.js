@@ -59,7 +59,9 @@ function turbolinksAnimateInit(el, options) {
     turbolinksAnimateData['delay'] = options.delay
     turbolinksAnimateData['reversedDisappearing'] = options.reversedDisappearing
     $('a[data-turbolinks-animate]').click( function() {
-        turbolinksAnimateData['animation'] = $(this).data('turbolinks-animate').toLowerCase();
+        turbolinksAnimateData['animation'] = $(this).data('turbolinks-animate-animation').toLowerCase();
+        turbolinksAnimateData['duration'] = $(this).data('turbolinks-animate-duration');
+        turbolinksAnimateData['delay'] = $(this).data('turbolinks-animate-delay');
     });
 };
 
