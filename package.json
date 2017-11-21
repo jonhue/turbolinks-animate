@@ -1,6 +1,6 @@
 {
   "name": "turbolinks-animate",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Rich & adaptive animations for apps using Turbolinks™",
   "main": "turbolinks-animate.js",
   "homepage": "https://slooob.github.io/turbolinks-animate.js",

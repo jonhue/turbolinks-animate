@@ -1,6 +1,6 @@
 /**!
  * @fileOverview turbolinks-animate.js - Animations extending Turbolinks
- * @version 1.0.2
+ * @version 1.0.3
  * @license
  * MIT License
  *
@@ -63,6 +63,7 @@ function turbolinksAnimateAppear() {
     turbolinksAnimateOptions();
 
     turbolinksAnimateElement.addClass(turbolinksAnimateGetClassListFor(turbolinksAnimateCustomAnimation() || turbolinksAnimateData['animation'], false));
+    Turbolinks.clearCache() // fix for cache issues
 };
 
 function turbolinksAnimateDisappear() {
@@ -70,6 +71,7 @@ function turbolinksAnimateDisappear() {
     turbolinksAnimateOptions();
 
     turbolinksAnimateElement.addClass(turbolinksAnimateGetClassListFor(turbolinksAnimateCustomAnimation() || turbolinksAnimateData['animation'], true));
+    Turbolinks.clearCache() // fix for cache issues
 };
 
 
