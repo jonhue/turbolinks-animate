@@ -91,7 +91,7 @@ $('body').turbolinksAnimate({ animation: 'fadeinright' });
 **Note:** The option falls back to `fadein`.
 **Note:** As a global choice you would only want to use appearing animations, as they will get reversed automatically when the current view disappears.
 
-For alternate approaches take a look at [Inline animations](#inline-animations) and animations for [Rails](#rails).
+For alternate approaches take a look at [inline animations](#inline-animations) and animations for [Rails](#rails).
 
 #### Advanced
 
