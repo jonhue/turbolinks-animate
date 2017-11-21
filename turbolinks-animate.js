@@ -1,6 +1,6 @@
 /**!
  * @fileOverview turbolinks-animate.js - Animations extending Turbolinks
- * @version 1.0.0
+ * @version 1.0.1
  * @license
  * MIT License
  *
@@ -35,22 +35,13 @@ $.fn.extend({
 
         options = $.extend(defaults, options);
 
-        document.addEventListener( 'turbolinks:load', function() {
-            turbolinksAnimateAppear();
-            turbolinksAnimateInit($(this), options);
-        });
-        document.addEventListener( 'turbolinks:request-start', function() {
-            turbolinksAnimateDisappear();
-        });
-        $(window).bind( 'popstate', function(event) {
-            turbolinksAnimateDisappear();
-        });
+        turbolinksAnimateInit($(this), options);
     }
 });
 
 
 
-var turbolinksAnimateData, turbolinksAnimateElement;
+var turbolinksAnimateData = {}, turbolinksAnimateElement;
 
 function turbolinksAnimateInit(el, options) {
     turbolinksAnimateElement = el;
@@ -71,21 +62,31 @@ function turbolinksAnimateAppear() {
     turbolinksAnimateReset();
     turbolinksAnimateOptions();
 
-    turbolinksAnimateElement.addClass(turbolinksAnimateGetClassListFor(turbolinksAnimateData['animation'], false));
+    turbolinksAnimateElement.addClass(turbolinksAnimateGetClassListFor(turbolinksAnimateCustomAnimation() || turbolinksAnimateData['animation'], false));
 };
 
 function turbolinksAnimateDisappear() {
     turbolinksAnimateReset();
     turbolinksAnimateOptions();
 
-    turbolinksAnimateElement.addClass(turbolinksAnimateGetClassListFor(turbolinksAnimateData['animation'], true));
+    turbolinksAnimateElement.addClass(turbolinksAnimateGetClassListFor(turbolinksAnimateCustomAnimation() || turbolinksAnimateData['animation'], true));
 };
 
 
 
+function turbolinksAnimateCustomAnimation() {
+    var classes = turbolinksAnimateElement.attr('class').split(' ');
+    for ( var i = 0; i < classes.length; i++ ) {
+        var matches = /^turbolinks-animate\-(.+)/.exec(classes[i]);
+        if (matches != null) {
+            return matches[1].substring(1);
+        };
+    };
+};
+
 function turbolinksAnimateOptions() {
     turbolinksAnimateElement.css({ 'animation-duration': turbolinksAnimateData['duration'] });
-    if (turbolinksAnimateData['delay']) {
+    if (turbolinksAnimateData['delay'] != false) {
         turbolinksAnimateElement.css({ 'animation-delay': turbolinksAnimateData['delay'] });
     };
 };
@@ -96,15 +97,10 @@ function turbolinksAnimateReset() {
 
 function turbolinksAnimateGetClassListFor(animation, disappears) {
     var classList = 'animated';
-    if (animation == 'fadein') { classList += ' fadeIn' }
-    else if (animation == 'fadeinup') { classList += ' fadeInUp' }
-    else if (animation == 'fadeindown') { classList += ' fadeInDown' }
-    else if (animation == 'fadeinleft') { classList += ' fadeInLeft' }
-    else if (animation == 'fadeinright') { classList += ' fadeInRight' }
-    else if (animation == 'fadeout') { classList += ' fadeOut' }
-    else if (animation == 'fadeoutup') { classList += (disappears && turbolinksAnimateData['reversedDisappearing'] ? ' fadeOutDown' : ' fadeOutUp') }
-    else if (animation == 'fadeoutdown') { classList += (disappears && turbolinksAnimateData['reversedDisappearing'] ? ' fadeOutUp' : ' fadeOutDown') }
-    else if (animation == 'fadeoutleft') { classList += ' fadeOutLeft' }
-    else if (animation == 'fadeoutright') { classList += ' fadeOutRight' };
+    if (animation == 'fadein') { classList += (disappears ? ' fadeOut' : ' fadeIn') }
+    else if (animation == 'fadeinup') { classList += (disappears ? (turbolinksAnimateData['reversedDisappearing'] ? ' fadeOutDown' : ' fadeOutUp') : ' fadeInUp') }
+    else if (animation == 'fadeindown') { classList += (disappears ? (turbolinksAnimateData['reversedDisappearing'] ? ' fadeOutUp' : ' fadeOutDown') : ' fadeInDown') }
+    else if (animation == 'fadeinleft') { classList += (disappears ? ' fadeOutLeft' : ' fadeInLeft') }
+    else if (animation == 'fadeinright') { classList += (disappears ? ' fadeOutRight' : ' fadeInRight') };
     return classList;
 };
