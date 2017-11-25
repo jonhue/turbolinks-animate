@@ -17,6 +17,7 @@ A dead simple way to add rich and adaptive animations to your app which is alrea
         * [Advanced](#advanced)
         * [Example](#example)
     * [Inline animations](#inline-animations)
+    * [Per Device-Type](#per-device-type)
     * [Rails](#rails)
 * [To Do](#to-do)
 * [Contributing](#contributing)
@@ -113,6 +114,23 @@ With turbolinks-animate.js you are able to set animations based on the links, wh
 <a href="" data-turbolinks-animate-animation="fadeout" data-turbolinks-animate-duration="0.3s" data-turbolinks-animate-delay="250">I am a link!</a>
 ```
 
+### Per Device-Type
+
+In addition you can specify animations specifically for certain screen sizes, just pass a hash:
+
+```html
+<body data-turbolinks-animate-animation="{"mobile":"fadeinup","tablet":"fadeindown","desktop":"fadein"}"></body>
+```
+
+**Note:** At the moment turbolinks-animate.js only supports the three screen sizes `mobile`, `tablet` and `desktop`. You can customize the breakpoints through the [options](#advanced).
+
+When a specific animation for the current screen size has not been given, an animation will be choosen through the following pattern:
+
+* `mobile`
+* `tablet`
+* `desktop`
+* `default` (e.g. a plain string, no hash)
+
 ### Rails
 
 A lot of times with frameworks like Ruby on Rails you want to be able to specify animations from within your controllers and views without nasty javascript nesting.
@@ -127,6 +145,7 @@ With turbolinks-animate.js you can just add a class to your initialized element,
 
 ## To Do
 
+* Add persistent elements
 * Add more animations from [Animate.css](https://github.com/daneden/animate.css)
 * Leave your suggestions [here](https://github.com/slooob/turbolinks-animate.js/issues/new)
 

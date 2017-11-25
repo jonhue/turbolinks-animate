@@ -4,6 +4,11 @@
 
 * nothing yet
 
+### 1.1.0 - 2017-11-25
+
+* features
+    * allow per device-type animations
+
 ### 1.0.4 - 2017-11-21
 
 * bugfixes
