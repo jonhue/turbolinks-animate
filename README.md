@@ -104,6 +104,10 @@ For alternate approaches take a look at [inline animations](#inline-animations) 
 
 **reversedDisappearing:** Whether or not a reversed animation should be used when disappearing. Accepts a boolean. Defaults to `true`.
 
+**mobileWidth:** The maximum width of a device to be interpreted as mobile. Accepts an integer or string. Defaults to `'500'`.
+
+**tabletWidth:** The maximum width of a device to be interpreted as a tablet. Accepts an integer or string. Defaults to `'1024'`.
+
 #### Example
 
 ```javascript
