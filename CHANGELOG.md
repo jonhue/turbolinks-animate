@@ -4,6 +4,16 @@
 
 * nothing yet
 
+### 1.3.1 - 2017-11-30
+
+* bugfixes
+    * utilize previous type declaration when appearing
+
+### 1.3.0 - 2017-11-30
+
+* features
+    * allow persistent elements dependent on type of animations
+
 ### 1.2.0 - 2017-11-30
 
 * features

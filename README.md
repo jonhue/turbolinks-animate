@@ -22,6 +22,7 @@ A dead simple & powerful way to add rich & adaptive animations to your app which
     * [Per Device-Type](#per-device-type)
     * [Overriding animations](#overriding-animations)
     * [Persistent elements](#persistent-elements)
+    * [Animation types](#animation-types)
 * [To Do](#to-do)
 * [Contributing](#contributing)
     * [Contributors](#contributors)
@@ -43,14 +44,14 @@ A dead simple & powerful way to add rich & adaptive animations to your app which
 First you need to add [turbolinks-animate.js](https://www.npmjs.com/package/turbolinks-animate), and its dependencies to your project, then initialize turbolinks-animate.js:
 
 ```javascript
-document.addEventListener( 'turbolinks:load', function() {
+$(document).on( 'turbolinks:load', function() {
     $('body').turbolinksAnimate();
     turbolinksAnimateAppear();
 });
-document.addEventListener( 'turbolinks:request-start', function() {
+$(document).on( 'turbolinks:request-start', function() {
     turbolinksAnimateDisappear();
 });
-$(window).bind( 'popstate', function(event) {
+$(window).on( 'popstate', function(event) {
     turbolinksAnimateDisappear();
 });
 ```
@@ -157,21 +158,35 @@ A lot of times you want to persist certain elements throughout requests, for exa
 
 ```html
 <body data-turbolinks-animate-animation="fadein">
-    <h1 data-turbolinks-animate-persist="persist">My app</h1>
+    <h1 data-turbolinks-animate-persist="true">My app</h1>
     <p>This is specific to my view!</p>
 </body>
 ```
 
 **Note:** Elements don't actually persist, the get replaced by the fetched page just like any other element. But because no animation gets applied, they look just as if the persist (as long as the newly fetched page includes the exact same element in the same position).
 
-Setting `data-turbolinks-animate-persist` to `persist` will result in the entire element (including its children) being excluded from the applied animations. If you want to apply the animations to children of the persistent element, but still keep it untouched, set the data attribute to `itself`. This is especially useful, when you apply a background color to your element, which remains the same, but changes it contents:
+Setting `data-turbolinks-animate-persist` to `true` will result in the entire element (including its children) being excluded from the applied animations. If you want to apply the animations to children of the persistent element, but still keep it untouched, append `-itself` to the data attribute. This is especially useful, when you apply a background color to your element, which remains the same, but changes it contents:
 
 ```html
 <body data-turbolinks-animate-animation="fadein">
-    <nav data-turbolinks-animate-persist="itself" style="background: black;">
+    <nav data-turbolinks-animate-persist-itself="true" style="background: black;">
         <h1 style="color: white;">View specific title</h1>
     </nav>
     <p>This is specific to my view!</p>
+</body>
+```
+
+### Animation types
+
+Often your permanent elements depend on the hyperlink clicked. Just specify the animation type on the hyperlink tag, and replace `true` with the chosen type on the persistent element:
+
+```html
+<body data-turbolinks-animate-animation="fadein">
+    <nav data-turbolinks-animate-persist-itself="nav" style="background: black;">
+        <h1 style="color: white;">View specific title</h1>
+    </nav>
+    <a href="/do" data-turbolinks-animate-type="nav">Persist navigation!</a>
+    <a href="/doo">Don't persist navigation!</a>
 </body>
 ```
 
