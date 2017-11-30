@@ -4,6 +4,13 @@
 
 * nothing yet
 
+### 1.3.2 - 2017-11-30
+
+* enhancements
+    * allow `data-turbolinks-animate-appear` attribute on hyperlinks to specify animation for following view
+* bugfixes
+    * fixes #2
+
 ### 1.3.1 - 2017-11-30
 
 * bugfixes

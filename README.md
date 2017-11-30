@@ -15,9 +15,6 @@ A dead simple & powerful way to add rich & adaptive animations to your app which
 * [Usage](#usage)
     * [Functions](#functions)
     * [Options](#options)
-        * [Animations](#animations)
-        * [Advanced](#advanced)
-        * [Example](#example)
     * [Inline animations](#inline-animations)
     * [Per Device-Type](#per-device-type)
     * [Overriding animations](#overriding-animations)
@@ -72,7 +69,7 @@ turbolinksAnimateDisappear();
 
 There are a number of ways in which you can adopt turbolinks-animate.js to your needs:
 
-#### Animations
+#### Animations:
 
 The vital part is choosing an animation to play. turbolinks-animate.js utilizes Animate.css to power them. These are the animations which are currently accessible:
 
@@ -99,19 +96,19 @@ $('body').turbolinksAnimate({ animation: 'fadeinright' });
 
 For alternate approaches take a look at [inline animations](#inline-animations) and animations for [Rails](#rails).
 
-#### Advanced
+#### Attributes:
 
-**duration:** CSS value for `animation-duration`. Accepts a string. Defaults to `0.5s`.
+*duration:* CSS value for `animation-duration`. Accepts a string. Defaults to `0.5s`.
 
-**delay:** Milliseconds after which animation starts. Accepts an integer or `false`. Defaults to `false`.
+*delay:* Milliseconds after which animation starts. Accepts an integer or `false`. Defaults to `false`.
 
-**reversedDisappearing:** Whether or not a reversed animation should be used when disappearing. Accepts a boolean. Defaults to `true`.
+*reversedDisappearing:* Whether or not a reversed animation should be used when disappearing. Accepts a boolean. Defaults to `true`.
 
-**mobileWidth:** The maximum width of a device to be interpreted as mobile. Accepts an integer or string. Defaults to `'500'`.
+*mobileWidth:* The maximum width of a device to be interpreted as mobile. Accepts an integer or string. Defaults to `'500'`.
 
-**tabletWidth:** The maximum width of a device to be interpreted as a tablet. Accepts an integer or string. Defaults to `'1024'`.
+*tabletWidth:* The maximum width of a device to be interpreted as a tablet. Accepts an integer or string. Defaults to `'1024'`.
 
-#### Example
+#### Example:
 
 ```javascript
 $('body').turbolinksAnimate({ animation: 'fadeinright', duration: '1s', delay: 1000 });
@@ -124,6 +121,16 @@ With turbolinks-animate.js you are able to set animations based on the links, wh
 ```html
 <a href="" data-turbolinks-animate-animation="fadeout" data-turbolinks-animate-duration="0.3s" data-turbolinks-animate-delay="250">I am a link!</a>
 ```
+
+#### Attributes:
+
+*data-turbolinks-animate-animation:* Animation to be applied when disappearing after hyperlink got clicked. Accepts a string.
+
+*data-turbolinks-animate-appear:* Animation to be applied when appearing on the next view after hyperlink got clicked. Accepts a string.
+
+*data-turbolinks-animate-duration:* CSS value for `animation-duration`. Accepts a string.
+
+*data-turbolinks-animate-delay:* Milliseconds after which animation starts. Accepts an integer or `false`.
 
 ### Per Device-Type
 

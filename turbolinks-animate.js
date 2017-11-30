@@ -1,6 +1,6 @@
 /**!
  * @fileOverview turbolinks-animate.js - Animations extending Turbolinks
- * @version 1.3.1
+ * @version 1.3.2
  * @license
  * MIT License
  *
@@ -42,10 +42,11 @@ $.fn.extend({
 });
 
 
-var turbolinksAnimateData = {}, turbolinksAnimateElement;
+var turbolinksAnimateData = {}, turbolinksAnimateInline = false, turbolinksAnimateElement;
 
 function turbolinksAnimateInit( el, options ) {
-    var turbolinksAnimatePreviousType = turbolinksAnimateData['type'];
+    var turbolinksAnimatePreviousType = turbolinksAnimateData['type'],
+        turbolinksAnimateAppear = turbolinksAnimateData['appear'];
     turbolinksAnimateData = {};
     turbolinksAnimateElement = el;
     turbolinksAnimateData['animation'] = options.animation;
@@ -53,9 +54,12 @@ function turbolinksAnimateInit( el, options ) {
     turbolinksAnimateData['delay'] = options.delay;
     turbolinksAnimateData['mobileMedia'] = options.mobileMedia;
     turbolinksAnimateData['tabletMedia'] = options.tabletMedia;
+    turbolinksAnimateData['appear'] = turbolinksAnimateAppear;
     turbolinksAnimateData['previousType'] = turbolinksAnimatePreviousType;
-    $('a').click( function() {
+    $('a, button').click( function() {
         turbolinksAnimateData['animation'] = $(this).data('turbolinks-animate-animation');
+        if ( $(this).data('turbolinks-animate-animation') !== undefined ) { turbolinksAnimateInline = true };
+        turbolinksAnimateData['appear'] = $(this).data('turbolinks-animate-appear');
         turbolinksAnimateData['duration'] = $(this).data('turbolinks-animate-duration');
         turbolinksAnimateData['delay'] = $(this).data('turbolinks-animate-delay');
         turbolinksAnimateData['type'] = $(this).data('turbolinks-animate-type');
@@ -70,6 +74,7 @@ function turbolinksAnimateAppear() {
 
     Turbolinks.clearCache() // fix for cache issues
     turbolinksAnimateAnimateElements(false);
+    delete turbolinksAnimateData['appear'];
 };
 
 function turbolinksAnimateDisappear() {
@@ -82,8 +87,8 @@ function turbolinksAnimateDisappear() {
 
 
 
-function turbolinksAnimateCustomAnimation() {
-    return turbolinksAnimateElement.data('turbolinks-animate-animation');
+function turbolinksAnimateGetAnimation() {
+    return turbolinksAnimateData['appear'] || ( turbolinksAnimateInline ? turbolinksAnimateData['animation'] : ( turbolinksAnimateElement.data('turbolinks-animate-animation') || turbolinksAnimateData['animation'] ) );
 };
 
 function turbolinksAnimateOptions() {
@@ -96,6 +101,45 @@ function turbolinksAnimateOptions() {
 function turbolinksAnimateReset() {
     turbolinksAnimateElement.removeClass('fadeIn fadeInUp fadeInDown fadeInLeft fadeInRightfadeOut fadeOutUp fadeOutDown fadeOutLeft fadeOutRight');
 };
+
+
+
+function turbolinksAnimateAnimateElements(disappears) {
+    if ( turbolinksAnimateElement.find('[data-turbolinks-animate-persist]').length > 0 || turbolinksAnimateElement.find('[data-turbolinks-animate-persist-itself]').length > 0 ) {
+        var turbolinksAnimateElements = turbolinksAnimateGetElements();
+        $(turbolinksAnimateElements).each(function() {
+            $(this).addClass(turbolinksAnimateGetClassListFor( turbolinksAnimateGetAnimation(), disappears ));
+        });
+    } else {
+        turbolinksAnimateElement.addClass(turbolinksAnimateGetClassListFor( turbolinksAnimateGetAnimation(), disappears ));
+    };
+
+    delete turbolinksAnimateData['previousType'];
+    turbolinksAnimateInline = false;
+};
+
+function turbolinksAnimateGetElements() {
+    var turbolinksAnimateElements = [];
+
+    getChildren(turbolinksAnimateElement);
+
+    function getChildren(parent) {
+        var turbolinksAnimateType = turbolinksAnimateData['type'] || turbolinksAnimateData['previousType'] || 'true';
+        if (parent.attr('data-turbolinks-animate-persist') == turbolinksAnimateType) {
+            return;
+        } else if ( parent.attr('data-turbolinks-animate-persist-itself') == turbolinksAnimateType || parent.find('[data-turbolinks-animate-persist]').length > 0 || parent.find('[data-turbolinks-animate-persist-itself]').length > 0 ) {
+            parent.children().each(function() {
+                getChildren($(this));
+            });
+        } else {
+            turbolinksAnimateElements.push(parent);
+        };
+    };
+
+    return turbolinksAnimateElements
+};
+
+
 
 function turbolinksAnimateGetClassListFor( animations, disappears ) {
     var classList = 'animated',
@@ -119,40 +163,4 @@ function turbolinksAnimateGetClassListFor( animations, disappears ) {
     else if ( animation == 'fadeoutleft' ) { classList += ' fadeOutLeft' }
     else if ( animation == 'fadeoutright' ) { classList += ' fadeOutRight' };
     return classList;
-};
-
-
-
-function turbolinksAnimateAnimateElements(disappears) {
-    if ( turbolinksAnimateElement.find('[data-turbolinks-animate-persist]').length > 0 || turbolinksAnimateElement.find('[data-turbolinks-animate-persist-itself]').length > 0 ) {
-        var turbolinksAnimateElements = turbolinksAnimateGetElements();
-        $(turbolinksAnimateElements).each(function() {
-            $(this).addClass(turbolinksAnimateGetClassListFor( turbolinksAnimateCustomAnimation() || turbolinksAnimateData['animation'], disappears ));
-        });
-    } else {
-        turbolinksAnimateElement.addClass(turbolinksAnimateGetClassListFor( turbolinksAnimateCustomAnimation() || turbolinksAnimateData['animation'], disappears ));
-    };
-};
-
-function turbolinksAnimateGetElements() {
-    var turbolinksAnimateElements = [];
-
-    getChildren(turbolinksAnimateElement);
-
-    function getChildren(parent) {
-        var turbolinksAnimateType = turbolinksAnimateData['type'] || turbolinksAnimateData['previousType'] || 'true';
-        if (parent.attr('data-turbolinks-animate-persist') == turbolinksAnimateType) {
-            return;
-        } else if ( parent.attr('data-turbolinks-animate-persist-itself') == turbolinksAnimateType || parent.find('[data-turbolinks-animate-persist]').length > 0 || parent.find('[data-turbolinks-animate-persist-itself]').length > 0 ) {
-            parent.children().each(function() {
-                getChildren($(this));
-            });
-        } else {
-            turbolinksAnimateElements.push(parent);
-        };
-    };
-
-    delete turbolinksAnimateData['previousType'];
-
-    return turbolinksAnimateElements
 };
