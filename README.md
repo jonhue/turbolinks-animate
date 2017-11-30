@@ -18,8 +18,8 @@ A dead simple & powerful way to add rich & adaptive animations to your app which
         * [Example](#example)
     * [Inline animations](#inline-animations)
     * [Per Device-Type](#per-device-type)
+    * [Overriding animations](#overriding-animations)
     * [Persistent elements](#persistent-elements)
-    * [Rails](#rails)
 * [To Do](#to-do)
 * [Contributing](#contributing)
     * [Contributors](#contributors)
@@ -126,8 +126,8 @@ With turbolinks-animate.js you are able to set animations based on the links, wh
 
 In addition you can specify animations specifically for certain screen sizes, just pass a hash:
 
-```html
-<body data-turbolinks-animate-animation="{"mobile":"fadeinup","tablet":"fadeindown","desktop":"fadein"}"></body>
+```javascript
+$('body').turbolinksAnimate({ animation: '{"mobile":"fadeinup","tablet":"fadeindown","desktop":"fadein"}', duration: '1s', delay: 1000 });
 ```
 
 **Note:** At the moment turbolinks-animate.js only supports the three screen sizes `mobile`, `tablet` and `desktop`. You can customize the breakpoints through the [options](#advanced).
@@ -138,6 +138,16 @@ When a specific animation for the current screen size has not been given, an ani
 * `tablet`
 * `desktop`
 * `default` (e.g. a plain string, no hash)
+
+### Overriding animations
+
+A lot of times with frameworks like Ruby on Rails you want to be able to specify animations from within your controllers and views without nasty javascript nesting.
+
+With turbolinks-animate.js you can just add a class to your initialized element, naming the animation you want to use. It will override the global default:
+
+```html
+<body class="turbolinks-animate--fadeinup"></body>
+```
 
 ### Persistent elements
 
@@ -163,21 +173,10 @@ Setting `data-turbolinks-animate-persist` to `persist` will result in the entire
 </body>
 ```
 
-### Rails
-
-A lot of times with frameworks like Ruby on Rails you want to be able to specify animations from within your controllers and views without nasty javascript nesting.
-
-With turbolinks-animate.js you can just add a class to your initialized element, naming the animation you want to use. It will override the global default:
-
-```html
-<body class="turbolinks-animate--fadeinup"></body>
-```
-
 ---
 
 ## To Do
 
-* Add persistent elements
 * Add more animations from [Animate.css](https://github.com/daneden/animate.css)
 * Leave your suggestions [here](https://github.com/slooob/turbolinks-animate.js/issues/new)
 
