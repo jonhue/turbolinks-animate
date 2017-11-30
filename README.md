@@ -140,7 +140,7 @@ In addition you can specify animations specifically for certain screen sizes, ju
 $('body').turbolinksAnimate({ animation: '{"mobile":"fadeinup","tablet":"fadeindown","desktop":"fadein"}', duration: '1s', delay: 1000 });
 ```
 
-**Note:** At the moment turbolinks-animate.js only supports the three screen sizes `mobile`, `tablet` and `desktop`. You can customize the breakpoints through the [options](#advanced).
+**Note:** At the moment turbolinks-animate.js only supports the three screen sizes `mobile`, `tablet` and `desktop`. You can customize the breakpoints through the [options](#options).
 
 When a specific animation for the current screen size has not been given, an animation will be choosen through the following pattern:
 
