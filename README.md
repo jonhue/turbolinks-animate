@@ -143,10 +143,10 @@ When a specific animation for the current screen size has not been given, an ani
 
 A lot of times with frameworks like Ruby on Rails you want to be able to specify animations from within your controllers and views without nasty javascript nesting.
 
-With turbolinks-animate.js you can just add a class to your initialized element, naming the animation you want to use. It will override the global default:
+With turbolinks-animate.js you can just add a data attribute to your initialized element, naming the animation you want to use. It will override the global default:
 
 ```html
-<body class="turbolinks-animate--fadeinup"></body>
+<body data-turbolinks-animate-animation="fadeinup"></body>
 ```
 
 ### Persistent elements
