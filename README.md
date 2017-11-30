@@ -5,6 +5,8 @@
 
 A dead simple & powerful way to add rich & adaptive animations to your app which is already using Turbolinks™.
 
+[**Demo**](https://phylator.herokuapp.com)
+
 ---
 
 ## Table of Contents
