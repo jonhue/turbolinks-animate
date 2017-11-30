@@ -96,7 +96,7 @@ $('body').turbolinksAnimate({ animation: 'fadeinright' });
 
 For alternate approaches take a look at [inline animations](#inline-animations) and animations for [Rails](#rails).
 
-#### Attributes:
+#### Options:
 
 *duration:* CSS value for `animation-duration`. Accepts a string. Defaults to `0.5s`.
 
