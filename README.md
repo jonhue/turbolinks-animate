@@ -3,7 +3,7 @@
 ![NPM Version](https://img.shields.io/npm/v/turbolinks-animate.svg)
 <img src="https://travis-ci.org/slooob/turbolinks-animate.js.svg?branch=master" />
 
-A dead simple way to add rich and adaptive animations to your app which is already using Turbolinks™.
+A dead simple & powerful way to add rich & adaptive animations to your app which is already using Turbolinks™.
 
 ---
 
@@ -18,6 +18,7 @@ A dead simple way to add rich and adaptive animations to your app which is alrea
         * [Example](#example)
     * [Inline animations](#inline-animations)
     * [Per Device-Type](#per-device-type)
+    * [Persistent elements](#persistent-elements)
     * [Rails](#rails)
 * [To Do](#to-do)
 * [Contributing](#contributing)
@@ -133,6 +134,30 @@ When a specific animation for the current screen size has not been given, an ani
 * `tablet`
 * `desktop`
 * `default` (e.g. a plain string, no hash)
+
+### Persistent elements
+
+A lot of times you want to persist certain elements throughout requests, for example a navigation bar or other parts of your layout that is being shared between views. turbolinks-animate.js makes it dead simple to declare persistent elements in your view:
+
+```html
+<body data-turbolinks-animate-animation="fadein">
+    <h1 data-turbolinks-animate-persist="persist">My app</h1>
+    <p>This is specific to my view!</p>
+</body>
+```
+
+**Note:** Elements don't actually persist, the get replaced by the fetched page just like any other element. But because no animation gets applied, they look just as if the persist (as long as the newly fetched page includes the exact same element in the same position).
+
+Setting `data-turbolinks-animate-persist` to `persist` will result in the entire element (including its children) being excluded from the applied animations. If you want to apply the animations to children of the persistent element, but still keep it untouched, set the data attribute to `itself`. This is especially useful, when you apply a background color to your element, which remains the same, but changes it contents:
+
+```html
+<body data-turbolinks-animate-animation="fadein">
+    <nav data-turbolinks-animate-persist="itself" style="background: black;">
+        <h1 style="color: white;">View specific title</h1>
+    </nav>
+    <p>This is specific to my view!</p>
+</body>
+```
 
 ### Rails
 

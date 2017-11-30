@@ -1,6 +1,6 @@
 /**!
  * @fileOverview turbolinks-animate.js - Animations extending Turbolinks
- * @version 1.1.0
+ * @version 1.2.0
  * @license
  * MIT License
  *
@@ -66,7 +66,7 @@ function turbolinksAnimateAppear() {
     turbolinksAnimateOptions();
 
     Turbolinks.clearCache() // fix for cache issues
-    turbolinksAnimateElement.addClass(turbolinksAnimateGetClassListFor( turbolinksAnimateCustomAnimation() || turbolinksAnimateData['animation'], false ));
+    turbolinksAnimateAnimateElements(false);
 };
 
 function turbolinksAnimateDisappear() {
@@ -74,7 +74,7 @@ function turbolinksAnimateDisappear() {
     turbolinksAnimateOptions();
 
     Turbolinks.clearCache() // fix for cache issues
-    turbolinksAnimateElement.addClass(turbolinksAnimateGetClassListFor( turbolinksAnimateCustomAnimation() || turbolinksAnimateData['animation'], true ));
+    turbolinksAnimateAnimateElements(true);
 };
 
 
@@ -116,4 +116,37 @@ function turbolinksAnimateGetClassListFor( animations, disappears ) {
     else if ( animation == 'fadeoutleft' ) { classList += ' fadeOutLeft' }
     else if ( animation == 'fadeoutright' ) { classList += ' fadeOutRight' };
     return classList;
+};
+
+
+
+function turbolinksAnimateAnimateElements(disappears) {
+    if ( turbolinksAnimateElement.find('[data-turbolinks-animate-persist]').length > 0 ) {
+        var turbolinksAnimateElements = turbolinksAnimateGetElements();
+        $(turbolinksAnimateElements).each(function() {
+            $(this).addClass(turbolinksAnimateGetClassListFor( turbolinksAnimateCustomAnimation() || turbolinksAnimateData['animation'], disappears ));
+        });
+    } else {
+        turbolinksAnimateElement.addClass(turbolinksAnimateGetClassListFor( turbolinksAnimateCustomAnimation() || turbolinksAnimateData['animation'], disappears ));
+    };
+};
+
+function turbolinksAnimateGetElements() {
+    var turbolinksAnimateElements = [];
+
+    getChildren(turbolinksAnimateElement);
+
+    function getChildren(parent) {
+        if (parent.attr('data-turbolinks-animate-persist') == 'persist') {
+            return;
+        } else if ( parent.attr('data-turbolinks-animate-persist') == 'itself' || parent.find('[data-turbolinks-animate-persist]').length > 0 ) {
+            parent.children().each(function() {
+                getChildren($(this));
+            });
+        } else {
+            turbolinksAnimateElements.push(parent);
+        };
+    };
+
+    return turbolinksAnimateElements
 };

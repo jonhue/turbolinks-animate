@@ -4,6 +4,11 @@
 
 * nothing yet
 
+### 1.2.0 - 2017-11-30
+
+* features
+    * allow persistent elements
+
 ### 1.1.0 - 2017-11-25
 
 * features
