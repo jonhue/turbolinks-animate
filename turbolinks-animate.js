@@ -1,6 +1,6 @@
 /**!
  * @fileOverview turbolinks-animate.js - Animations extending Turbolinks
- * @version 1.3.2
+ * @version 1.3.3
  * @license
  * MIT License
  *
@@ -87,8 +87,8 @@ function turbolinksAnimateDisappear() {
 
 
 
-function turbolinksAnimateGetAnimation() {
-    return turbolinksAnimateData['appear'] || ( turbolinksAnimateInline ? turbolinksAnimateData['animation'] : ( turbolinksAnimateElement.data('turbolinks-animate-animation') || turbolinksAnimateData['animation'] ) );
+function turbolinksAnimateGetAnimation(disappears) {
+    return ( disappears == false ? turbolinksAnimateData['appear'] : undefined ) || ( turbolinksAnimateInline ? turbolinksAnimateData['animation'] : ( turbolinksAnimateElement.data('turbolinks-animate-animation') || turbolinksAnimateData['animation'] ) );
 };
 
 function turbolinksAnimateOptions() {
@@ -108,10 +108,10 @@ function turbolinksAnimateAnimateElements(disappears) {
     if ( turbolinksAnimateElement.find('[data-turbolinks-animate-persist]').length > 0 || turbolinksAnimateElement.find('[data-turbolinks-animate-persist-itself]').length > 0 ) {
         var turbolinksAnimateElements = turbolinksAnimateGetElements();
         $(turbolinksAnimateElements).each(function() {
-            $(this).addClass(turbolinksAnimateGetClassListFor( turbolinksAnimateGetAnimation(), disappears ));
+            $(this).addClass(turbolinksAnimateGetClassListFor( turbolinksAnimateGetAnimation(disappears), disappears ));
         });
     } else {
-        turbolinksAnimateElement.addClass(turbolinksAnimateGetClassListFor( turbolinksAnimateGetAnimation(), disappears ));
+        turbolinksAnimateElement.addClass(turbolinksAnimateGetClassListFor( turbolinksAnimateGetAnimation(disappears), disappears ));
     };
 
     delete turbolinksAnimateData['previousType'];

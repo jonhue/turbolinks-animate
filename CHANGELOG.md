@@ -4,6 +4,11 @@
 
 * nothing yet
 
+### 1.3.3 - 2017-12-1
+
+* bugfixes
+    * fixing disappear-animation when the following appear animation has been specified on the hyperlink
+
 ### 1.3.2 - 2017-11-30
 
 * enhancements
