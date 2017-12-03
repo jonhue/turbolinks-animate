@@ -48,7 +48,7 @@ $(document).on( 'turbolinks:load', function() {
 $(document).on( 'turbolinks:request-start', function() {
     turbolinksAnimateDisappear();
 });
-$(window).on( 'popstate', function(event) {
+$(window).on( 'popstate beforeunload', function(event) {
     turbolinksAnimateDisappear();
 });
 ```
