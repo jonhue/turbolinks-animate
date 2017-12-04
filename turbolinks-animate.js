@@ -1,6 +1,6 @@
 /**!
  * @fileOverview turbolinks-animate.js - Animations extending Turbolinks
- * @version 1.3.3
+ * @version 1.3.4
  * @license
  * MIT License
  *
@@ -28,7 +28,7 @@ $.fn.extend({
     turbolinksAnimate: function(options) {
         var defaults = {
             animation: 'fadein',
-            duration: '0.5s',
+            duration: '0.3s',
             delay: false,
             reversedDisappearing: true,
             mobileMedia: '500',
@@ -69,20 +69,22 @@ function turbolinksAnimateInit( el, options ) {
 
 
 function turbolinksAnimateAppear() {
-    turbolinksAnimateReset();
-    turbolinksAnimateOptions();
-
-    Turbolinks.clearCache() // fix for cache issues
-    turbolinksAnimateAnimateElements(false);
+    turbolinksAnimateToggle(false);
     delete turbolinksAnimateData['appear'];
 };
 
 function turbolinksAnimateDisappear() {
-    turbolinksAnimateReset();
-    turbolinksAnimateOptions();
+    turbolinksAnimateToggle(true);
+};
 
-    Turbolinks.clearCache() // fix for cache issues
-    turbolinksAnimateAnimateElements(true);
+function turbolinksAnimateToggle(disappears) {
+    if ( turbolinksAnimateData['animation'] != 'false' ) {
+        turbolinksAnimateReset();
+        turbolinksAnimateOptions();
+
+        Turbolinks.clearCache() // fix for cache issues
+        turbolinksAnimateAnimateElements(disappears);
+    };
 };
 
 

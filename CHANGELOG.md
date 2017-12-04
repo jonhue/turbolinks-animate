@@ -4,6 +4,12 @@
 
 * nothing yet
 
+### 1.3.4 - 2017/12/4
+
+* enhancements
+    * disable turbolinks-animate.js on hyperlink by setting `data-turbolinks-animate-animation` to `'false'`
+    * changing default animation duration from `0.5s` to `0.3s`
+
 ### 1.3.3 - 2017/12/1
 
 * bugfixes

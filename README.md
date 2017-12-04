@@ -98,7 +98,7 @@ For alternate approaches take a look at [inline animations](#inline-animations) 
 
 #### Options:
 
-*duration:* CSS value for `animation-duration`. Accepts a string. Defaults to `0.5s`.
+*duration:* CSS value for `animation-duration`. Accepts a string. Defaults to `0.3s`.
 
 *delay:* Milliseconds after which animation starts. Accepts an integer or `false`. Defaults to `false`.
 
@@ -124,7 +124,7 @@ With turbolinks-animate.js you are able to set animations based on the links, wh
 
 #### Attributes:
 
-*data-turbolinks-animate-animation:* Animation to be applied when disappearing after hyperlink got clicked. Accepts a string.
+*data-turbolinks-animate-animation:* Animation to be applied when disappearing after hyperlink got clicked. Accepts a string. Set it to `'false'` to disable turbolinks-animate.js on this specific link.
 
 *data-turbolinks-animate-appear:* Animation to be applied when appearing on the next view after hyperlink got clicked. Accepts a string.
 
