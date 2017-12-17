@@ -1,7 +1,7 @@
 # turbolinks-animate.js
 
 ![NPM Version](https://img.shields.io/npm/v/turbolinks-animate.svg)
-<img src="https://travis-ci.org/slooob/turbolinks-animate.js.svg?branch=master" />
+<img src="https://travis-ci.org/jonhue/turbolinks-animate.js.svg?branch=master" />
 
 A dead simple & powerful way of adding rich & adaptive animations to your app which is already using Turbolinks™.
 
