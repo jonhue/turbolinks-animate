@@ -4,6 +4,11 @@
 
 * nothing yet
 
+### 1.3.5 - 2017/12/31
+
+* bugfixes
+    * fixing #4 - throwing errors on subsequent requests
+
 ### 1.3.4 - 2017/12/4
 
 * enhancements
