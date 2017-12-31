@@ -1,10 +1,10 @@
 /**!
  * @fileOverview turbolinks-animate.js - Animations extending Turbolinks
- * @version 1.3.4
+ * @version 1.3.5
  * @license
  * MIT License
  *
- * Copyright (c) 2017 Slooob
+ * Copyright (c) 2017 Jonas Hübotter
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -90,7 +90,7 @@ function turbolinksAnimateToggle(disappears) {
 
 
 function turbolinksAnimateGetAnimation(disappears) {
-    return ( disappears == false ? turbolinksAnimateData['appear'] : undefined ) || ( turbolinksAnimateInline ? turbolinksAnimateData['animation'] : ( turbolinksAnimateElement.data('turbolinks-animate-animation') || turbolinksAnimateData['animation'] ) );
+    return ( disappears ? null : turbolinksAnimateData['appear'] ) || ( turbolinksAnimateInline ? turbolinksAnimateData['animation'] : ( turbolinksAnimateElement.data('turbolinks-animate-animation') || turbolinksAnimateData['animation'] ) );
 };
 
 function turbolinksAnimateOptions() {

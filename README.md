@@ -1,9 +1,11 @@
 # turbolinks-animate.js
 
 ![NPM Version](https://img.shields.io/npm/v/turbolinks-animate.svg)
-<img src="https://travis-ci.org/slooob/turbolinks-animate.js.svg?branch=master" />
+<img src="https://travis-ci.org/jonhue/turbolinks-animate.js.svg?branch=master" />
 
-A dead simple & powerful way to add rich & adaptive animations to your app which is already using Turbolinks™.
+A dead simple & powerful way of adding rich & adaptive animations to your app which is already using Turbolinks™.
+
+Utilize the [gem](https://github.com/jonhue/turbolinks-animate) when using turbolinks-animate.js with Rails.
 
 [**Demo**](https://phylator.herokuapp.com)
 
