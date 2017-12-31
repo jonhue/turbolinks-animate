@@ -90,7 +90,7 @@ function turbolinksAnimateToggle(disappears) {
 
 
 function turbolinksAnimateGetAnimation(disappears) {
-    return ( disappears == false ? turbolinksAnimateData['appear'] : undefined ) || ( turbolinksAnimateInline ? turbolinksAnimateData['animation'] : ( turbolinksAnimateElement.data('turbolinks-animate-animation') || turbolinksAnimateData['animation'] ) );
+    return ( disappears ? null : turbolinksAnimateData['appear'] ) || ( turbolinksAnimateInline ? turbolinksAnimateData['animation'] : ( turbolinksAnimateElement.data('turbolinks-animate-animation') || turbolinksAnimateData['animation'] ) );
 };
 
 function turbolinksAnimateOptions() {
