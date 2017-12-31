@@ -1,15 +1,14 @@
 {
   "name": "turbolinks-animate",
-  "version": "1.3.4",
+  "version": "1.3.5",
   "description": "Rich & adaptive animations for apps using Turbolinks™",
   "main": "turbolinks-animate.js",
-  "homepage": "https://slooob.github.io/turbolinks-animate.js",
   "bugs": {
-    "url": "https://github.com/slooob/turbolinks-animate.js/issues",
-    "email": "developer@slooob.com"
+    "url": "https://github.com/jonhue/turbolinks-animate.js/issues",
+    "email": "jonas.huebotter@gmail.com.com"
   },
-  "repository": "https://github.com/slooob/turbolinks-animate.js",
-  "author": "slooob <developer@slooob.com>",
+  "repository": "https://github.com/jonhue/turbolinks-animate.js",
+  "author": "Jonas Hübotter <jonas.huebotter@gmail.com.com>",
   "license": "MIT",
   "dependencies": {
     "animate.css": "^3.5.2",
