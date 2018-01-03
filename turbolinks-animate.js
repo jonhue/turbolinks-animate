@@ -1,6 +1,6 @@
 /**!
  * @fileOverview turbolinks-animate.js - Animations extending Turbolinks
- * @version 1.3.5
+ * @version 1.3.6
  * @license
  * MIT License
  *
@@ -90,7 +90,7 @@ function turbolinksAnimateToggle(disappears) {
 
 
 function turbolinksAnimateGetAnimation(disappears) {
-    return ( disappears ? null : turbolinksAnimateData['appear'] ) || ( turbolinksAnimateInline ? turbolinksAnimateData['animation'] : ( turbolinksAnimateElement.data('turbolinks-animate-animation') || turbolinksAnimateData['animation'] ) );
+    return ( disappears ? null : turbolinksAnimateData['appear'] ) || ( turbolinksAnimateInline ? turbolinksAnimateData['animation'] : ( ( typeof turbolinksAnimateElement.data('turbolinks-animate-animation') !== 'undefined' ? turbolinksAnimateElement.data('turbolinks-animate-animation') : null ) || turbolinksAnimateData['animation'] ) );
 };
 
 function turbolinksAnimateOptions() {

@@ -4,6 +4,11 @@
 
 * nothing yet
 
+### 1.3.6 - 2018/01/03
+
+* bugfixes
+    * fixing errors related to #4
+
 ### 1.3.5 - 2017/12/31
 
 * bugfixes
