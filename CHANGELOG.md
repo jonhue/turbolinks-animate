@@ -4,6 +4,14 @@
 
 * nothing yet
 
+### 1.3.7 - 2018/01/04
+
+* enhancements
+    * improving code readability
+* bugfixes
+    * fixing error on disappear animation
+    * allow links inside persistent elements to be clicked (#5)
+
 ### 1.3.6 - 2018/01/03
 
 * bugfixes
