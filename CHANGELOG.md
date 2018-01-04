@@ -4,6 +4,13 @@
 
 * nothing yet
 
+### 1.3.8 - 2018/01/04
+
+* enhancements
+    * smoother animations
+* bugfixes
+    * fixed not fading in content
+
 ### 1.3.7 - 2018/01/04
 
 * enhancements

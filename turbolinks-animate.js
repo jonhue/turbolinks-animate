@@ -1,6 +1,6 @@
 /**!
  * @fileOverview turbolinks-animate.js - Animations extending Turbolinks
- * @version 1.3.7
+ * @version 1.3.8
  * @license
  * MIT License
  *
@@ -58,10 +58,10 @@ function turbolinksAnimateInit( el, options ) {
     turbolinksAnimateData['previousType'] = turbolinksAnimatePreviousType;
     $('a, button').click( function() {
         if ( $(this).data('turbolinks-animate-animation') !== undefined ) { turbolinksAnimateInline = true };
-        turbolinksAnimateData['animation'] = $(this).data('turbolinks-animate-animation');
+        turbolinksAnimateData['animation'] = $(this).data('turbolinks-animate-animation') || options.animation;
         turbolinksAnimateData['appear'] = $(this).data('turbolinks-animate-appear');
-        turbolinksAnimateData['duration'] = $(this).data('turbolinks-animate-duration');
-        turbolinksAnimateData['delay'] = $(this).data('turbolinks-animate-delay');
+        turbolinksAnimateData['duration'] = $(this).data('turbolinks-animate-duration') || options.duration;
+        turbolinksAnimateData['delay'] = $(this).data('turbolinks-animate-delay') || options.delay;
         turbolinksAnimateData['type'] = $(this).data('turbolinks-animate-type');
     });
 };
@@ -103,9 +103,17 @@ function turbolinksAnimateGetAnimation(disappears) {
 };
 
 function turbolinksAnimateOptions() {
-    turbolinksAnimateElement.css({ 'animation-duration': turbolinksAnimateData['duration'] });
+    turbolinksAnimateElement.css('animationDuration', turbolinksAnimateData['duration']);
     if (turbolinksAnimateData['delay'] != false) {
-        turbolinksAnimateElement.css({ 'animation-delay': turbolinksAnimateData['delay'] });
+        turbolinksAnimateElement.css('animationDelay', turbolinksAnimateData['delay']);
+    };
+    if ( typeof turbolinksAnimateElements !== 'undefined' ) {
+        $(turbolinksAnimateElements).each(function() {
+            $(this).css('animationDuration', turbolinksAnimateData['duration']);
+            if (turbolinksAnimateData['delay'] != false) {
+                $(this).css('animationDelay', turbolinksAnimateData['delay']);
+            };
+        });
     };
 };
 
@@ -124,15 +132,20 @@ function turbolinksAnimateAnimateElements(disappears) {
     if ( turbolinksAnimateElement.find('[data-turbolinks-animate-persist]').length > 0 || turbolinksAnimateElement.find('[data-turbolinks-animate-persist-itself]').length > 0 ) {
         turbolinksAnimateElements = turbolinksAnimateGetElements();
         $(turbolinksAnimateElements).each(function() {
+            $(this).one( 'webkitAnimationEnd mozAnimationEnd oAnimationEnd oanimationend animationend', function() {
+                setTimeout(function() {
+                    turbolinksAnimateReset();
+                }, 250);
+            });
             $(this).addClass(turbolinksAnimateGetClassListFor( turbolinksAnimateGetAnimation(disappears), disappears ));
         });
-    } else {
-        turbolinksAnimateElement.addClass(turbolinksAnimateGetClassListFor( turbolinksAnimateGetAnimation(disappears), disappears ));
     };
-
-    setTimeout(function() {
-        turbolinksAnimateReset();
-    }, turbolinksAnimateData['delay']);
+    turbolinksAnimateElement.one( 'webkitAnimationEnd mozAnimationEnd oAnimationEnd oanimationend animationend', function() {
+        setTimeout(function() {
+            turbolinksAnimateReset();
+        }, 250);
+    });
+    turbolinksAnimateElement.addClass(turbolinksAnimateGetClassListFor( turbolinksAnimateGetAnimation(disappears), disappears ));
 
     delete turbolinksAnimateData['previousType'];
     turbolinksAnimateInline = false;
