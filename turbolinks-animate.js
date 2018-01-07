@@ -118,12 +118,13 @@ function turbolinksAnimateOptions() {
 };
 
 function turbolinksAnimateReset() {
+    var classes = 'fadeIn fadeInUp fadeInDown fadeInLeft fadeInRightfadeOut fadeOutUp fadeOutDown fadeOutLeft fadeOutRight';
     if ( typeof turbolinksAnimateElements !== 'undefined' ) {
         $(turbolinksAnimateElements).each(function() {
-            $(this).removeClass('fadeIn fadeInUp fadeInDown fadeInLeft fadeInRightfadeOut fadeOutUp fadeOutDown fadeOutLeft fadeOutRight');
+            $(this).removeClass(classes);
         });
     };
-    turbolinksAnimateElement.removeClass('fadeIn fadeInUp fadeInDown fadeInLeft fadeInRightfadeOut fadeOutUp fadeOutDown fadeOutLeft fadeOutRight');
+    turbolinksAnimateElement.removeClass(classes);
 };
 
 
