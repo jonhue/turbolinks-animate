@@ -5,10 +5,10 @@
   "main": "turbolinks-animate.js",
   "bugs": {
     "url": "https://github.com/jonhue/turbolinks-animate.js/issues",
-    "email": "jonas.huebotter@gmail.com.com"
+    "email": "me@jonhue.me"
   },
   "repository": "https://github.com/jonhue/turbolinks-animate.js",
-  "author": "Jonas Hübotter <jonas.huebotter@gmail.com.com>",
+  "author": "Jonas Hübotter <me@jonhue.me>",
   "license": "MIT",
   "dependencies": {
     "animate.css": "^3.5.2",
