@@ -4,6 +4,11 @@
 
 * nothing yet
 
+### 1.3.9 - 2018/01/07
+
+* bugfixes
+    * fixed persistent elements
+
 ### 1.3.8 - 2018/01/04
 
 * enhancements

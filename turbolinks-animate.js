@@ -1,6 +1,6 @@
 /**!
  * @fileOverview turbolinks-animate.js - Animations extending Turbolinks
- * @version 1.3.8
+ * @version 1.3.9
  * @license
  * MIT License
  *
@@ -139,13 +139,14 @@ function turbolinksAnimateAnimateElements(disappears) {
             });
             $(this).addClass(turbolinksAnimateGetClassListFor( turbolinksAnimateGetAnimation(disappears), disappears ));
         });
+    } else {
+        turbolinksAnimateElement.one( 'webkitAnimationEnd mozAnimationEnd oAnimationEnd oanimationend animationend', function() {
+            setTimeout(function() {
+                turbolinksAnimateReset();
+            }, 250);
+        });
+        turbolinksAnimateElement.addClass(turbolinksAnimateGetClassListFor( turbolinksAnimateGetAnimation(disappears), disappears ));
     };
-    turbolinksAnimateElement.one( 'webkitAnimationEnd mozAnimationEnd oAnimationEnd oanimationend animationend', function() {
-        setTimeout(function() {
-            turbolinksAnimateReset();
-        }, 250);
-    });
-    turbolinksAnimateElement.addClass(turbolinksAnimateGetClassListFor( turbolinksAnimateGetAnimation(disappears), disappears ));
 
     delete turbolinksAnimateData['previousType'];
     turbolinksAnimateInline = false;
