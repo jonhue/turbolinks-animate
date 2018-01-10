@@ -4,7 +4,7 @@
 
 * nothing yet
 
-### 1.3.9 - 2018/01/10
+### 2.0.0 - 2018/01/10
 
 * features
     * introducing global `TurbolinksAnimate` object
