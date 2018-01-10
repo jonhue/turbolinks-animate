@@ -40,31 +40,34 @@ Utilize the [gem](https://github.com/jonhue/turbolinks-animate) when using turbo
 
 ## Usage
 
-First you need to add [turbolinks-animate.js](https://www.npmjs.com/package/turbolinks-animate), and its dependencies to your project, then initialize turbolinks-animate.js:
+First you need to add [turbolinks-animate.js](https://www.npmjs.com/package/turbolinks-animate), and its dependencies to your project, then initialize it:
 
 ```javascript
 $(document).on( 'turbolinks:load', function() {
-    $('body').turbolinksAnimate();
-    turbolinksAnimateAppear();
-});
-$(document).on( 'turbolinks:request-start', function() {
-    turbolinksAnimateDisappear();
-});
-$(window).on( 'popstate beforeunload', function(event) {
-    turbolinksAnimateDisappear();
+    TurbolinksAnimate.init();
 });
 ```
 
-**Note:** You can only use `turbolinksAnimate()` for one element at a time.
+By default the `body` element is being used for animating page transitions. If you want to just transition specific parts of your views, you can specify an alternate element:
+
+```javascript
+$(document).on( 'turbolinks:load', function() {
+    TurbolinksAnimate.init({ element: $('main') });
+});
+```
+
+**Note:** You can only use `TurbolinksAnimate.init()` for one element at a time.
+
+In versions < 2, you were able to set custom listeners for `appear` and `disappear` animations. To restore the old behavior set the `customListeners` [options](#options) to `true`.
 
 ### Functions
 
 ```javascript
 // Shows the initialized element
-turbolinksAnimateAppear();
+TurbolinksAnimate.appear();
 
 // Hides the initialized element
-turbolinksAnimateDisappear();
+TurbolinksAnimate.disappear();
 ```
 
 ### Options
@@ -75,45 +78,99 @@ There are a number of ways in which you can adopt turbolinks-animate.js to your 
 
 The vital part is choosing an animation to play. turbolinks-animate.js utilizes Animate.css to power them. These are the animations which are currently accessible:
 
-* fadeIn
-* fadeInUp
-* fadeInDown
-* fadeInRight
-* fadeInLeft
-* fadeOut
-* fadeOutUp
-* fadeOutDown
-* fadeOutRight
-* fadeOutLeft
+* `fadeIn`
+* `fadeInUp`
+* `fadeInDown`
+* `fadeInRight`
+* `fadeInLeft`
+* `fadeInUpBig`
+* `fadeInDownBig`
+* `fadeInRightBig`
+* `fadeInLeftBig`
+* `fadeOut`
+* `fadeOutUp`
+* `fadeOutDown`
+* `fadeOutRight`
+* `fadeOutLeft`
+* `fadeOutUpBig`
+* `fadeOutDownBig`
+* `fadeOutRightBig`
+* `fadeOutLeftBig`
+* `bounceIn`
+* `bounceInUp`
+* `bounceInDown`
+* `bounceInRight`
+* `bounceInLeft`
+* `bounceOut`
+* `bounceOutUp`
+* `bounceOutDown`
+* `bounceOutRight`
+* `bounceOutLeft`
+* `flipInX`
+* `flipInY`
+* `flipOutX`
+* `flipOutY`
+* `lightSpeedIn`
+* `lightSpeedOut`
+* `rotateIn`
+* `rotateInDownLeft`
+* `rotateInDownRight`
+* `rotateInUpRight`
+* `rotateInUpLeft`
+* `rotateOut`
+* `rotateOutDownLeft`
+* `rotateOutDownRight`
+* `rotateOutUpRight`
+* `rotateOutUpLeft`
+* `rollIn`
+* `rollOut`
+* `zoomIn`
+* `zoomInUp`
+* `zoomInDown`
+* `zoomInRight`
+* `zoomInLeft`
+* `zoomOut`
+* `zoomOutUp`
+* `zoomOutDown`
+* `zoomOutRight`
+* `zoomOutLeft`
+* `slideInUp`
+* `slideInDown`
+* `slideInRight`
+* `slideInLeft`
+* `slideOutUp`
+* `slideOutDown`
+* `slideOutRight`
+* `slideOutLeft`
 
 There are three ways in which you can specify the animation you want to use. To choose a globally used animation pass an option when initializing turbolinks-animate.js:
 
 ```javascript
-$('body').turbolinksAnimate({ animation: 'fadeinright' });
+TurbolinksAnimate.init({ animation: 'fadeinright' });
 ```
 
 **Note:** The option falls back to `fadein`.
 
-**Note:** As a global choice you would only want to use appearing animations, as they will get reversed automatically when the current view disappears.
+**Note:** As a global choice you would only want to use appearing animations, as they will get fade out automatically when the current view disappears.
 
 For alternate approaches take a look at [inline animations](#inline-animations) and animations [overriding animations](#overriding-animations).
 
 #### Options:
 
-*duration:* CSS value for `animation-duration`. Accepts a string. Defaults to `0.3s`.
+* `duration` CSS value for `animation-duration`. Accepts a string. Defaults to `0.3s`.
 
-*delay:* Milliseconds after which animation starts. Accepts an integer or `false`. Defaults to `false`.
+* `delay` Milliseconds after which animation starts. Accepts an integer or `false`. Defaults to `false`.
 
-*reversedDisappearing:* Whether or not a reversed animation should be used when disappearing. Accepts a boolean. Defaults to `true`.
+* `reversedDisappearing` Whether or not a reversed animation should be used when disappearing. Accepts a boolean. Defaults to `false`.
 
-*mobileWidth:* The maximum width of a device to be interpreted as mobile. Accepts an integer or string. Defaults to `'500'`.
+* `breakpoints` An array of breakpoint objects to specify breakpoints used for [Per Device-Type animations](#per-device-type). Accepts an array. Defaults to: `[{ name: 'mobile', width: 500 },{ name: 'tablet', width: 1024 },{ name: 'desktop', width: 1440 }]`
 
-*tabletWidth:* The maximum width of a device to be interpreted as a tablet. Accepts an integer or string. Defaults to `'1024'`.
+* `customListeners` Restore the behavior of versions < 2 to set custom listeners to run `appear()` and `disappear()` functions. Accepts a boolean. Defaults to `false`.
 
 #### Example:
 
 ```javascript
-$('body').turbolinksAnimate({ animation: 'fadeinright', duration: '1s', delay: 1000 });
+TurbolinksAnimate.init({ animation: 'fadeinright', duration: '1s', delay: 1000 });
 ```
 
 ### Inline animations
@@ -126,30 +183,23 @@ With turbolinks-animate.js you are able to set animations based on the links, wh
 
 #### Attributes:
 
-*data-turbolinks-animate-animation:* Animation to be applied when disappearing after hyperlink got clicked. Accepts a string. Set it to `'false'` to disable turbolinks-animate.js on this specific link.
+* `data-turbolinks-animate-animation` Animation to be applied when disappearing after a hyperlink got clicked. Accepts a string. Set it to `'false'` to disable turbolinks-animate.js on this specific link.
 
-*data-turbolinks-animate-appear:* Animation to be applied when appearing on the next view after hyperlink got clicked. Accepts a string.
+* `data-turbolinks-animate-appear` Animation to be applied when appearing on the next view after a hyperlink got clicked. Accepts a string.
 
-*data-turbolinks-animate-duration:* CSS value for `animation-duration`. Accepts a string.
+* `data-turbolinks-animate-duration` CSS value for `animation-duration`. Accepts a string.
 
-*data-turbolinks-animate-delay:* Milliseconds after which animation starts. Accepts an integer or `false`.
+* `data-turbolinks-animate-delay` Milliseconds after which animation starts. Accepts an integer or `false`.
 
 ### Per Device-Type
 
 In addition you can specify animations specifically for certain screen sizes, just pass a hash:
 
 ```javascript
-$('body').turbolinksAnimate({ animation: '{"mobile":"fadeinup","tablet":"fadeindown","desktop":"fadein"}', duration: '1s', delay: 1000 });
+TurbolinksAnimate.init({ animation: { 'mobile': 'fadeinup', 'tablet': 'fadeindown', 'desktop': 'fadein' } });
 ```
 
-**Note:** At the moment turbolinks-animate.js only supports the three screen sizes `mobile`, `tablet` and `desktop`. You can customize the breakpoints through the [options](#options).
-
-When a specific animation for the current screen size has not been given, an animation will be choosen through the following pattern:
-
-* `mobile`
-* `tablet`
-* `desktop`
-* `default` (e.g. a plain string, no hash)
+**Note:** You can customize the breakpoints through the [options](#options).
 
 ### Overriding animations
 

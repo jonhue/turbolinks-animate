@@ -4,6 +4,13 @@
 
 * nothing yet
 
+### 1.3.9 - 2018/01/10
+
+* features
+    * introducing global `TurbolinksAnimate` object
+    * allowing for custom breakpoints
+    * add numerous animations from Animate.css
+
 ### 1.3.9 - 2018/01/07
 
 * bugfixes
