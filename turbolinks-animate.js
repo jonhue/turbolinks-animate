@@ -1,6 +1,6 @@
 /**!
  * @fileOverview turbolinks-animate.js - Animations extending Turbolinks
- * @version 2.0.0
+ * @version 2.0.1
  * @license
  * MIT License
  *
@@ -103,6 +103,7 @@ var TurbolinksAnimate = TurbolinksAnimate || new function() {
         array.push(animation.name);
     });
     this.animateClasses = array;
+    // this.scrollPositions = [];
 
     this.init = function(options) {
 
@@ -123,13 +124,22 @@ var TurbolinksAnimate = TurbolinksAnimate || new function() {
 
         TurbolinksAnimate.element = options.element;
         TurbolinksAnimate.setOptions(options);
+        if ( 'scrollRestoration' in history ) {
+            history.scrollRestoration = 'manual';
+        };
 
         if ( TurbolinksAnimate.initialized == false && options.customListeners == false ) {
+            $(document).on( 'turbolinks:before-visit', function() {
+                // TurbolinksAnimate.scrollPositions.unshift({ scrollPosition: $(window).scrollTop(), url: window.location.href });
+                // console.log( 'disappears ... ' + TurbolinksAnimate.scrollPositions );
+            });
             $(document).on( 'turbolinks:request-start', function() {
                 TurbolinksAnimate.disappear();
             });
             $(window).on( 'popstate beforeunload', function() {
                 TurbolinksAnimate.disappear();
+                // TurbolinksAnimate.scrollPositions.unshift({ scrollPosition: $(window).scrollTop(), url: document.referrer });
+                // console.log('disappears ... ' + TurbolinksAnimate.scrollPositions);
             });
         };
 
@@ -170,6 +180,18 @@ var TurbolinksAnimate = TurbolinksAnimate || new function() {
 
     this.appear = function() {
         TurbolinksAnimate.disappearing = false;
+
+        // if ( TurbolinksAnimate.scrollPositions.length > 0 ) {
+        //     console.log(TurbolinksAnimate.scrollPositions);
+        //     var scrollPositions = TurbolinksAnimate.scrollPositions.filter(function(obj) {
+        //         return obj.url == window.location.href;
+        //     });
+        //     if ( scrollPositions.length > 0 ) {
+        //         $(window).scrollTop(scrollPositions[0].scrollPosition);
+        //         console.log(scrollPositions[0].scrollPosition);
+        //     };
+        // };
+
         TurbolinksAnimate.toggle();
     };
     this.disappear = function() {
