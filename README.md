@@ -40,6 +40,8 @@ Utilize the [gem](https://github.com/jonhue/turbolinks-animate) when using turbo
 
 ## Usage
 
+**[How to migrate to version 2](MIGRATING.md)**
+
 First you need to add [turbolinks-animate.js](https://www.npmjs.com/package/turbolinks-animate), and its dependencies to your project, then initialize it:
 
 ```javascript
