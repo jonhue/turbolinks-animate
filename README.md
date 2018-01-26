@@ -22,6 +22,7 @@ Utilize the [gem](https://github.com/jonhue/turbolinks-animate) when using turbo
     * [Overriding animations](#overriding-animations)
     * [Persistent elements](#persistent-elements)
     * [Animation types](#animation-types)
+    * [Events](#events)
 * [To Do](#to-do)
 * [Contributing](#contributing)
     * [Contributors](#contributors)
@@ -250,6 +251,14 @@ Often your permanent elements depend on the hyperlink clicked. Just specify the 
     <a href="/doo">Don't persist navigation!</a>
 </body>
 ```
+
+### Events
+
+turbolinks-animate.js emits events that allow you to track the animation lifecycle. turbolinks-animate.js fires events on the `$(document)` object.
+
+* `turbolinks:animation-start` fires when an animation starts. The main turbolinks-animate.js element is the event target. Access the animation with `event.data.animation`. Access whether content appears or disappears with `event.data.disappearing`.
+
+* `turbolinks:animation-start` fires when an animation ends. The main turbolinks-animate.js element is the event target. Access whether content appeared or disappeared with `event.data.disappearing`.
 
 ---
 

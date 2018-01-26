@@ -1,6 +1,6 @@
 /**!
  * @fileOverview turbolinks-animate.js - Animations extending Turbolinks
- * @version 2.0.1
+ * @version 2.1.0
  * @license
  * MIT License
  *
@@ -250,6 +250,23 @@ var TurbolinksAnimate = TurbolinksAnimate || new function() {
     };
 
     this.animate = function() {
+        var animation = TurbolinksAnimate.getAnimation();
+
+        $(TurbolinksAnimate.element).one( 'webkitAnimationEnd mozAnimationEnd oAnimationEnd oanimationend animationend', function() {
+            var e = jQuery.Event('turbolinks:animation-end');
+            e.target = $(this);
+            e.data = { disappearing: TurbolinksAnimate.disappearing };
+            $(document).trigger(e);
+        });
+
+        var e = jQuery.Event('turbolinks:animation-start');
+        e.target = $(TurbolinksAnimate.element);
+        e.data = {
+            disappearing: TurbolinksAnimate.disappearing,
+            animation: animation
+        };
+        $(document).trigger(e);
+
         $(TurbolinksAnimate.elements).each(function() {
             $(this).one( 'webkitAnimationEnd mozAnimationEnd oAnimationEnd oanimationend animationend', function() {
                 setTimeout(function() {
@@ -258,7 +275,7 @@ var TurbolinksAnimate = TurbolinksAnimate || new function() {
                     };
                 }, 250);
             });
-            $(this).addClass(TurbolinksAnimate.getClassListFor(TurbolinksAnimate.getAnimation()));
+            $(this).addClass(TurbolinksAnimate.getClassListFor(animation));
         });
     };
     this.getAnimation = function() {
