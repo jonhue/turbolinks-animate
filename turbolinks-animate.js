@@ -1,6 +1,6 @@
 /**!
  * @fileOverview turbolinks-animate.js - Animations extending Turbolinks
- * @version 2.1.0
+ * @version 2.1.1
  * @license
  * MIT License
  *
@@ -24,7 +24,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-var TurbolinksAnimate = TurbolinksAnimate || new function() {
+export var TurbolinksAnimate = TurbolinksAnimate || new function() {
 
     this.options = {};
     this.inline = false;
