@@ -1,6 +1,6 @@
 {
   "name": "turbolinks-animate",
-  "version": "2.1.1",
+  "version": "3.0.0",
   "description": "Rich & adaptive animations for apps using Turbolinks™",
   "main": "turbolinks-animate.js",
   "bugs": {
@@ -12,7 +12,6 @@
   "license": "MIT",
   "dependencies": {
     "animate.css": "^3.5.2",
-    "jquery": "^3.2.1",
     "turbolinks": "^5.0.3"
   }
 }

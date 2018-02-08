@@ -43,7 +43,21 @@ Utilize the [gem](https://github.com/jonhue/turbolinks-animate) when using turbo
 
 **[How to migrate to version 2](MIGRATING.md)**
 
-First you need to add [turbolinks-animate.js](https://www.npmjs.com/package/turbolinks-animate), and its dependencies to your project, then initialize it:
+First you need to add [turbolinks-animate.js](https://www.npmjs.com/package/turbolinks-animate), and its dependencies to your project
+
+**ES6:**
+
+```javascript
+import 'turbolinks-animate';
+```
+
+**ES5:**
+
+```javascript
+require('turbolinks-animate');
+```
+
+Then initialize it:
 
 ```javascript
 $(document).on( 'turbolinks:load', function() {
@@ -254,7 +268,7 @@ Often your permanent elements depend on the hyperlink clicked. Just specify the 
 
 ### Events
 
-turbolinks-animate.js emits events that allow you to track the animation lifecycle. turbolinks-animate.js fires events on the `$(document)` object.
+turbolinks-animate.js emits events that allow you to track the animation lifecycle. turbolinks-animate.js fires events on the `document` object.
 
 * `turbolinks:animation-start` fires when an animation starts. The main turbolinks-animate.js element is the event target. Access the animation with `event.data.animation`. Access whether content appears or disappears with `event.data.disappearing`.
 
