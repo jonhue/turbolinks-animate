@@ -35,7 +35,7 @@ Utilize the [gem](https://github.com/jonhue/turbolinks-animate) when using turbo
 
 **Size:** turbolinks-animate.js takes < 1kb gzipped.
 
-**Dependencies:** [jQuery](https://github.com/jquery/jquery), [Turbolinks](https://github.com/turbolinks/turbolinks), [Animate.css](https://github.com/daneden/animate.css)
+**Dependencies:** [Turbolinks](https://github.com/turbolinks/turbolinks), [Animate.css](https://github.com/daneden/animate.css)
 
 ---
 
@@ -60,7 +60,7 @@ require('turbolinks-animate');
 Then initialize it:
 
 ```javascript
-$(document).on( 'turbolinks:load', function() {
+document.addEventListener( 'turbolinks:load', function() {
     TurbolinksAnimate.init();
 });
 ```
@@ -68,7 +68,7 @@ $(document).on( 'turbolinks:load', function() {
 By default the `body` element is being used for animating page transitions. If you want to just transition specific parts of your views, you can specify an alternate element:
 
 ```javascript
-$(document).on( 'turbolinks:load', function() {
+document.addEventListener( 'turbolinks:load', function() {
     TurbolinksAnimate.init({ element: $('main') });
 });
 ```
@@ -270,9 +270,9 @@ Often your permanent elements depend on the hyperlink clicked. Just specify the 
 
 turbolinks-animate.js emits events that allow you to track the animation lifecycle. turbolinks-animate.js fires events on the `document` object.
 
-* `turbolinks:animation-start` fires when an animation starts. The main turbolinks-animate.js element is the event target. Access the animation with `event.data.animation`. Access whether content appears or disappears with `event.data.disappearing`.
+* `turbolinks:animation-start` fires when an animation starts. The main turbolinks-animate.js element can be accessed with `event.data.element`. Access the animation with `event.data.animation`. Access whether content appears or disappears with `event.data.disappearing`.
 
-* `turbolinks:animation-start` fires when an animation ends. The main turbolinks-animate.js element is the event target. Access whether content appeared or disappeared with `event.data.disappearing`.
+* `turbolinks:animation-end` fires when an animation ends. The main turbolinks-animate.js element can be accessed with `event.data.element`. Access whether content appeared or disappeared with `event.data.disappearing`.
 
 ---
 
