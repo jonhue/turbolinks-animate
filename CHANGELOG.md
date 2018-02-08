@@ -4,6 +4,11 @@
 
 * nothing yet
 
+### 3.0.0 - 2018/02/08
+
+* features
+    * fully switch to ES6
+
 ### 2.1.1 - 2018/02/03
 
 * enhancements
