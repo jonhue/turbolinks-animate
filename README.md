@@ -69,7 +69,7 @@ By default the `body` element is being used for animating page transitions. If y
 
 ```javascript
 document.addEventListener( 'turbolinks:load', function() {
-    TurbolinksAnimate.init({ element: $('main') });
+    TurbolinksAnimate.init({ element: document.querySelector('main') });
 });
 ```
 
