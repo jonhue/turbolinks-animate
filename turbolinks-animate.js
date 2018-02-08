@@ -99,9 +99,7 @@ window.TurbolinksAnimate = window.TurbolinksAnimate || new function() {
         { name: 'slideOutRight', disappear: true, reverse: 'slideOutLeft' }
     ];
     var array = [];
-    $.each( this.animations, function( k, animation ) {
-        array.push(animation.name);
-    });
+    this.animations.forEach( ( k, animation ) => array.push(animation.name) );
     this.animateClasses = array;
     // this.scrollPositions = [];
 
