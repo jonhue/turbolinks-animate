@@ -7,7 +7,7 @@ A dead simple & powerful way of adding rich & adaptive animations to your app wh
 
 Utilize the [gem](https://github.com/jonhue/turbolinks-animate) when using turbolinks-animate.js with Rails.
 
-[**Demo**](https://phylator.herokuapp.com)
+[**Demo**](https://jonhue.me)
 
 ---
 
