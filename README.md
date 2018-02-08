@@ -45,16 +45,8 @@ Utilize the [gem](https://github.com/jonhue/turbolinks-animate) when using turbo
 
 First you need to add [turbolinks-animate.js](https://www.npmjs.com/package/turbolinks-animate), and its dependencies to your project
 
-**ES6:**
-
 ```javascript
 import 'turbolinks-animate';
-```
-
-**ES5:**
-
-```javascript
-require('turbolinks-animate');
 ```
 
 Then initialize it:
