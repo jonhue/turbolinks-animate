@@ -2,7 +2,7 @@
   "name": "turbolinks-animate",
   "version": "3.0.0",
   "description": "Rich & adaptive animations for apps using Turbolinks™",
-  "main": "turbolinks-animate.js",
+  "main": "src/turbolinks-animate.js",
   "bugs": {
     "url": "https://github.com/jonhue/turbolinks-animate.js/issues",
     "email": "me@jonhue.me"
