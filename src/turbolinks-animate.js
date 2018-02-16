@@ -141,15 +141,17 @@ window.TurbolinksAnimate = window.TurbolinksAnimate || new function() {
             });
         };
 
-        document.querySelectorAll('a, button').addEventListener( 'click', function() {
-            if ( typeof this.dataset.turbolinksAnimateAnimation !== 'undefined' ) {
-                TurbolinksAnimate.inline = true;
-            };
-            TurbolinksAnimate.options.animation = this.dataset.turbolinksAnimateAnimation || options.animation;
-            TurbolinksAnimate.options.appear = this.dataset.turbolinksAnimateAppear;
-            TurbolinksAnimate.options.duration = this.dataset.turbolinksAnimateDuration || options.duration;
-            TurbolinksAnimate.options.delay = this.dataset.turbolinksAnimateDelay || options.delay;
-            TurbolinksAnimate.options.type = this.dataset.turbolinksAnimateType;
+        document.querySelectorAll('a, button').forEach((element) => {
+            element.addEventListener( 'click', function() {
+                if ( typeof this.dataset.turbolinksAnimateAnimation !== 'undefined' ) {
+                    TurbolinksAnimate.inline = true;
+                };
+                TurbolinksAnimate.options.animation = this.dataset.turbolinksAnimateAnimation || options.animation;
+                TurbolinksAnimate.options.appear = this.dataset.turbolinksAnimateAppear;
+                TurbolinksAnimate.options.duration = this.dataset.turbolinksAnimateDuration || options.duration;
+                TurbolinksAnimate.options.delay = this.dataset.turbolinksAnimateDelay || options.delay;
+                TurbolinksAnimate.options.type = this.dataset.turbolinksAnimateType;
+            });
         });
 
         TurbolinksAnimate.initialized = true;
