@@ -4,6 +4,11 @@
 
 * nothing yet
 
+### 3.0.2 - 2018/02/18
+
+* bugfixes
+    * minor fixes
+
 ### 3.0.1 - 2018/02/18
 
 * bugfixes

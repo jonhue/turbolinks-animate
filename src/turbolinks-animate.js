@@ -1,6 +1,6 @@
 /**!
  * @fileOverview turbolinks-animate.js - Animations extending Turbolinks
- * @version 3.0.0
+ * @version 3.0.2
  * @license
  * MIT License
  *
@@ -98,14 +98,14 @@ window.TurbolinksAnimate = window.TurbolinksAnimate || new function() {
         { name: 'slideInRight', disappear: 'slideOutRight', reverse: 'slideInLeft' },
         { name: 'slideOutRight', disappear: true, reverse: 'slideOutLeft' }
     ];
-    var array = [];
-    this.animations.forEach( ( k, animation ) => array.push(animation.name) );
+    let array = [];
+    this.animations.forEach( ( animation, k ) => array.push(animation.name) );
     this.animateClasses = array;
     // this.scrollPositions = [];
 
-    this.init = function(options) {
+    this.init = (options) => {
 
-        var defaults = {
+        let defaults = {
             element: document.querySelector('body'),
             animation: 'fadein',
             duration: '0.3s',
@@ -127,14 +127,14 @@ window.TurbolinksAnimate = window.TurbolinksAnimate || new function() {
         };
 
         if ( TurbolinksAnimate.initialized == false && options.customListeners == false ) {
-            document.addEventListener( 'turbolinks:before-visit', function() {
+            document.addEventListener( 'turbolinks:before-visit', () => {
                 // TurbolinksAnimate.scrollPositions.unshift({ scrollPosition: $(window).scrollTop(), url: window.location.href });
                 // console.log( 'disappears ... ' + TurbolinksAnimate.scrollPositions );
             });
-            document.addEventListener( 'turbolinks:request-start', function() {
+            document.addEventListener( 'turbolinks:request-start', () => {
                 TurbolinksAnimate.disappear();
             });
-            window.addEventListener( 'popstate beforeunload', function() {
+            window.addEventListener( 'popstate beforeunload', () => {
                 TurbolinksAnimate.disappear();
                 // TurbolinksAnimate.scrollPositions.unshift({ scrollPosition: $(window).scrollTop(), url: document.referrer });
                 // console.log('disappears ... ' + TurbolinksAnimate.scrollPositions);
@@ -142,15 +142,15 @@ window.TurbolinksAnimate = window.TurbolinksAnimate || new function() {
         };
 
         document.querySelectorAll('a, button').forEach((element) => {
-            element.addEventListener( 'click', function() {
-                if ( typeof this.dataset.turbolinksAnimateAnimation !== 'undefined' ) {
+            element.addEventListener( 'click', () => {
+                if ( typeof element.dataset.turbolinksAnimateAnimation !== 'undefined' ) {
                     TurbolinksAnimate.inline = true;
                 };
-                TurbolinksAnimate.options.animation = this.dataset.turbolinksAnimateAnimation || options.animation;
-                TurbolinksAnimate.options.appear = this.dataset.turbolinksAnimateAppear;
-                TurbolinksAnimate.options.duration = this.dataset.turbolinksAnimateDuration || options.duration;
-                TurbolinksAnimate.options.delay = this.dataset.turbolinksAnimateDelay || options.delay;
-                TurbolinksAnimate.options.type = this.dataset.turbolinksAnimateType;
+                TurbolinksAnimate.options.animation = element.dataset.turbolinksAnimateAnimation || options.animation;
+                TurbolinksAnimate.options.appear = element.dataset.turbolinksAnimateAppear;
+                TurbolinksAnimate.options.duration = element.dataset.turbolinksAnimateDuration || options.duration;
+                TurbolinksAnimate.options.delay = element.dataset.turbolinksAnimateDelay || options.delay;
+                TurbolinksAnimate.options.type = element.dataset.turbolinksAnimateType;
             });
         });
 
@@ -161,9 +161,9 @@ window.TurbolinksAnimate = window.TurbolinksAnimate || new function() {
 
     };
 
-    this.setOptions = function(options) {
+    this.setOptions = (options) => {
 
-        var previousType = TurbolinksAnimate.options.type,
+        let previousType = TurbolinksAnimate.options.type,
             appear = TurbolinksAnimate.options.appear;
 
         TurbolinksAnimate.options = {
@@ -178,7 +178,7 @@ window.TurbolinksAnimate = window.TurbolinksAnimate || new function() {
 
     };
 
-    this.appear = function() {
+    this.appear = () => {
         TurbolinksAnimate.disappearing = false;
 
         // if ( TurbolinksAnimate.scrollPositions.length > 0 ) {
@@ -194,11 +194,11 @@ window.TurbolinksAnimate = window.TurbolinksAnimate || new function() {
 
         TurbolinksAnimate.toggle();
     };
-    this.disappear = function() {
+    this.disappear = () => {
         TurbolinksAnimate.disappearing = true;
         TurbolinksAnimate.toggle();
     };
-    this.toggle = function() {
+    this.toggle = () => {
         if ( TurbolinksAnimate.options.animation != 'false' ) {
             TurbolinksAnimate.resetClasses();
             TurbolinksAnimate.getElements();
@@ -209,16 +209,16 @@ window.TurbolinksAnimate = window.TurbolinksAnimate || new function() {
         };
     };
 
-    this.getElements = function() {
+    this.getElements = () => {
         TurbolinksAnimate.elements = [];
 
         function getChildren(parent) {
-            var type = TurbolinksAnimate.options.type || TurbolinksAnimate.options.previousType || 'true';
+            let type = TurbolinksAnimate.options.type || TurbolinksAnimate.options.previousType || 'true';
             if ( parent.dataset.turbolinksAnimatePersist == type ) {
                 return;
-            } else if ( parent.dataset.turbolinksAnimatePersist-itself == type || parent.querySelectorAll('[data-turbolinks-animate-persist]').length > 0 || parent.querySelectorAll('[data-turbolinks-animate-persist-itself]').length > 0 ) {
-                parent.children.forEach(function() {
-                    getChildren(this);
+            } else if ( parent.dataset.turbolinksAnimatePersistItself == type || parent.querySelectorAll('[data-turbolinks-animate-persist]').length > 0 || parent.querySelectorAll('[data-turbolinks-animate-persist-itself]').length > 0 ) {
+                parent.children.forEach((child) => {
+                    getChildren(child);
                 });
             } else {
                 TurbolinksAnimate.elements.push(parent);
@@ -227,40 +227,42 @@ window.TurbolinksAnimate = window.TurbolinksAnimate || new function() {
 
         getChildren(TurbolinksAnimate.element);
     };
-    this.useOptions = function() {
+    this.useOptions = () => {
         if ( TurbolinksAnimate.elements != null ) {
-            TurbolinksAnimate.elements.forEach(function() {
-                this.style.animationDuration = TurbolinksAnimate.options.duration;
+            TurbolinksAnimate.elements.forEach((element) => {
+                element.style.animationDuration = TurbolinksAnimate.options.duration;
                 if ( TurbolinksAnimate.options.delay != false ) {
-                    this.style.animationDelay = TurbolinksAnimate.options.delay;
+                    element.style.animationDelay = TurbolinksAnimate.options.delay;
                 };
             });
         };
     };
 
-    this.reset = function() {
+    this.reset = () => {
         delete TurbolinksAnimate.options.appear;
         delete TurbolinksAnimate.options.previousType;
         TurbolinksAnimate.inline = false;
     };
-    this.resetClasses = function() {
-        TurbolinksAnimate.elements.forEach(function() {
-            this.classList.remove(TurbolinksAnimate.animateClasses.join(' '));
-        });
+    this.resetClasses = () => {
+        if ( TurbolinksAnimate.elements != null ) {
+            TurbolinksAnimate.elements.forEach((element) => {
+                TurbolinksAnimate.animateClasses.forEach( (animation) => element.classList.remove(animation) );
+            });
+        }
     };
 
-    this.animate = function() {
-        var animation = TurbolinksAnimate.getAnimation();
+    this.animate = () => {
+        let animation = TurbolinksAnimate.getAnimation();
 
-        TurbolinksAnimate.element.addEventListener( 'webkitAnimationEnd mozAnimationEnd oAnimationEnd oanimationend animationend', function(event) {
+        TurbolinksAnimate.element.addEventListener( 'webkitAnimationEnd mozAnimationEnd oAnimationEnd oanimationend animationend', (event) => {
             if (event.currentTarget.dataset.triggered) return;
             event.currentTarget.dataset.triggered = true;
 
             if (window.CustomEvent) {
-                var event = new CustomEvent( 'turbolinks:animation-end', { detail: { element: this, disappearing: TurbolinksAnimate.disappearing } } );
+                var event = new CustomEvent( 'turbolinks:animation-end', { detail: { element: TurbolinksAnimate.element, disappearing: TurbolinksAnimate.disappearing } } );
             } else {
                 var event = document.createEvent('CustomEvent');
-                event.initCustomEvent( 'turbolinks:animation-end', true, true, { element: this, disappearing: TurbolinksAnimate.disappearing } );
+                event.initCustomEvent( 'turbolinks:animation-end', true, true, { element: TurbolinksAnimate.element, disappearing: TurbolinksAnimate.disappearing } );
             };
             document.dispatchEvent(event);
         });
@@ -273,21 +275,21 @@ window.TurbolinksAnimate = window.TurbolinksAnimate || new function() {
         };
         document.dispatchEvent(event);
 
-        TurbolinksAnimate.elements.forEach(function() {
-            this.addEventListener( 'webkitAnimationEnd mozAnimationEnd oAnimationEnd oanimationend animationend', function() {
+        TurbolinksAnimate.elements.forEach((element) => {
+            element.addEventListener( 'webkitAnimationEnd mozAnimationEnd oAnimationEnd oanimationend animationend', () => {
                 if (event.currentTarget.dataset.triggered) return;
                 event.currentTarget.dataset.triggered = true;
-                setTimeout(function() {
+                setTimeout(() => {
                     if ( TurbolinksAnimate.disappearing == false ) {
                         TurbolinksAnimate.resetClasses();
                     };
                 }, 250);
             });
-            this.classList.add(TurbolinksAnimate.getClassListFor(animation));
+            TurbolinksAnimate.getClassListFor(animation).forEach( (animation) => element.classList.add(animation) );
         });
     };
-    this.getAnimation = function() {
-        var animation;
+    this.getAnimation = () => {
+        let animation;
 
         if (!TurbolinksAnimate.disappearing) { animation = TurbolinksAnimate.options.appear };
         if (TurbolinksAnimate.inline) {
@@ -300,15 +302,15 @@ window.TurbolinksAnimate = window.TurbolinksAnimate || new function() {
 
         return animation;
     };
-    this.getClassListFor = function(animations) {
-        var classList = 'animated',
+    this.getClassListFor = (animations) => {
+        let classList = ['animated'],
             browserWidth = window.innerWidth,
             animation = null;
 
-        var breakpoints = TurbolinksAnimate.options.breakpoints.sort(function( a, b ) {
+        let breakpoints = TurbolinksAnimate.options.breakpoints.sort(( a, b ) => {
             return b.width - a.width;
         });
-        breakpoints.forEach(function( k, breakpoint ) {
+        breakpoints.forEach(( k, breakpoint ) => {
             if ( animation == null && browserWidth <= breakpoint.width ) {
                 animation = animations[breakpoint.name.toString];
             };
@@ -317,19 +319,18 @@ window.TurbolinksAnimate = window.TurbolinksAnimate || new function() {
             animation = animations;
         };
 
-        classList += ' ';
-        animation = TurbolinksAnimate.animations.filter( object => object.name.toLowerCase == animation.toLowerCase )[0];
+        animation = TurbolinksAnimate.animations.filter( object => object.name.toLowerCase() == animation.toLowerCase() )[0];
         if ( TurbolinksAnimate.disappearing ) {
             if ( animation.disappear != true ) {
-                animation = TurbolinksAnimate.animations.filter( object => object.name.toLowerCase == animation.disappear.toLowerCase )[0];
+                animation = TurbolinksAnimate.animations.filter( object => object.name.toLowerCase() == animation.disappear.toLowerCase() )[0];
             };
             if ( TurbolinksAnimate.options.reversedDisappearing && animation.reverse != null ) {
-                classList += animation.reverse;
+                classList.push(animation.reverse);
             } else {
-                classList += animation.name;
+                classList.push(animation.name);
             };
         } else {
-            classList += animation.name;
+            classList.push(animation.name);
         };
 
         return classList;
