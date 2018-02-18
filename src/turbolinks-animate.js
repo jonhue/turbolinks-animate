@@ -106,7 +106,7 @@ window.TurbolinksAnimate = window.TurbolinksAnimate || new function() {
     this.init = function(options) {
 
         var defaults = {
-            element: $('body'),
+            element: document.querySelector('body'),
             animation: 'fadein',
             duration: '0.3s',
             delay: false,
@@ -118,7 +118,7 @@ window.TurbolinksAnimate = window.TurbolinksAnimate || new function() {
             ],
             customListeners: false
         };
-        options = $.extend( defaults, options );
+        options = extend( {}, defaults, options );
 
         TurbolinksAnimate.element = options.element;
         TurbolinksAnimate.setOptions(options);
@@ -333,4 +333,13 @@ window.TurbolinksAnimate = window.TurbolinksAnimate || new function() {
         return classList;
     };
 
+};
+
+
+function extend() {
+    for ( let i=1; i<arguments.length; i++ )
+        for ( let key in arguments[i] )
+            if ( arguments[i].hasOwnProperty(key) )
+                arguments[0][key] = arguments[i][key];
+    return arguments[0];
 };
