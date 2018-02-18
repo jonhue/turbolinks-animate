@@ -4,6 +4,11 @@
 
 * nothing yet
 
+### 3.0.4 - 2018/02/18
+
+* bugfixes
+    * fixed `window` event listeners
+
 ### 3.0.3 - 2018/02/18
 
 * bugfixes

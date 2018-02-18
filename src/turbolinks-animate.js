@@ -1,6 +1,6 @@
 /**!
  * @fileOverview turbolinks-animate.js - Animations extending Turbolinks
- * @version 3.0.3
+ * @version 3.0.4
  * @license
  * MIT License
  *
@@ -101,7 +101,6 @@ window.TurbolinksAnimate = window.TurbolinksAnimate || new function() {
     let array = [];
     this.animations.forEach( ( animation, k ) => array.push(animation.name) );
     this.animateClasses = array;
-    // this.scrollPositions = [];
 
     this.init = (options) => {
 
@@ -128,16 +127,15 @@ window.TurbolinksAnimate = window.TurbolinksAnimate || new function() {
 
         if ( TurbolinksAnimate.initialized == false && options.customListeners == false ) {
             document.addEventListener( 'turbolinks:before-visit', () => {
-                // TurbolinksAnimate.scrollPositions.unshift({ scrollPosition: $(window).scrollTop(), url: window.location.href });
-                // console.log( 'disappears ... ' + TurbolinksAnimate.scrollPositions );
             });
             document.addEventListener( 'turbolinks:request-start', () => {
                 TurbolinksAnimate.disappear();
             });
-            window.addEventListener( 'popstate beforeunload', () => {
+            window.addEventListener( 'popstate', () => {
                 TurbolinksAnimate.disappear();
-                // TurbolinksAnimate.scrollPositions.unshift({ scrollPosition: $(window).scrollTop(), url: document.referrer });
-                // console.log('disappears ... ' + TurbolinksAnimate.scrollPositions);
+            });
+            window.addEventListener( 'beforeunload', () => {
+                TurbolinksAnimate.disappear();
             });
         };
 
@@ -180,18 +178,6 @@ window.TurbolinksAnimate = window.TurbolinksAnimate || new function() {
 
     this.appear = () => {
         TurbolinksAnimate.disappearing = false;
-
-        // if ( TurbolinksAnimate.scrollPositions.length > 0 ) {
-        //     console.log(TurbolinksAnimate.scrollPositions);
-        //     var scrollPositions = TurbolinksAnimate.scrollPositions.filter(function(obj) {
-        //         return obj.url == window.location.href;
-        //     });
-        //     if ( scrollPositions.length > 0 ) {
-        //         $(window).scrollTop(scrollPositions[0].scrollPosition);
-        //         console.log(scrollPositions[0].scrollPosition);
-        //     };
-        // };
-
         TurbolinksAnimate.toggle();
     };
     this.disappear = () => {
