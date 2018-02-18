@@ -4,6 +4,11 @@
 
 * nothing yet
 
+### 3.0.3 - 2018/02/18
+
+* bugfixes
+    * fixed `undifined function 'forEach'`
+
 ### 3.0.2 - 2018/02/18
 
 * bugfixes

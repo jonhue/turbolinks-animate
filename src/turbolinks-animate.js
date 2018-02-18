@@ -1,6 +1,6 @@
 /**!
  * @fileOverview turbolinks-animate.js - Animations extending Turbolinks
- * @version 3.0.2
+ * @version 3.0.3
  * @license
  * MIT License
  *
@@ -217,9 +217,10 @@ window.TurbolinksAnimate = window.TurbolinksAnimate || new function() {
             if ( parent.dataset.turbolinksAnimatePersist == type ) {
                 return;
             } else if ( parent.dataset.turbolinksAnimatePersistItself == type || parent.querySelectorAll('[data-turbolinks-animate-persist]').length > 0 || parent.querySelectorAll('[data-turbolinks-animate-persist-itself]').length > 0 ) {
-                parent.children.forEach((child) => {
-                    getChildren(child);
-                });
+                let children = parent.children;
+                for ( let i = 0; i < children.length; i++ ) {
+                    getChildren(children[i]);
+                }
             } else {
                 TurbolinksAnimate.elements.push(parent);
             };
