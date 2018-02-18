@@ -8,6 +8,7 @@
 
 * features
     * fully switch to ES6
+    * remove jQuery dependency
 
 ### 2.1.1 - 2018/02/03
 
