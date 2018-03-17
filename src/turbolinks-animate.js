@@ -1,6 +1,6 @@
 /**!
  * @fileOverview turbolinks-animate.js - Animations extending Turbolinks
- * @version 3.0.4
+ * @version 3.0.5
  * @license
  * MIT License
  *

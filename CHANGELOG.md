@@ -4,6 +4,11 @@
 
 * nothing yet
 
+### 3.0.5 - 2018/03/17
+
+* enhancements
+    * don't trigger animation if `mailto:` link got clicked
+
 ### 3.0.4 - 2018/02/18
 
 * bugfixes
