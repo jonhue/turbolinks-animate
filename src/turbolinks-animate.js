@@ -126,16 +126,18 @@ window.TurbolinksAnimate = window.TurbolinksAnimate || new function() {
         };
 
         if ( TurbolinksAnimate.initialized == false && options.customListeners == false ) {
-            document.addEventListener( 'turbolinks:before-visit', () => {
-            });
             document.addEventListener( 'turbolinks:request-start', () => {
                 TurbolinksAnimate.disappear();
             });
             window.addEventListener( 'popstate', () => {
                 TurbolinksAnimate.disappear();
             });
-            window.addEventListener( 'beforeunload', () => {
-                TurbolinksAnimate.disappear();
+            let ignoreBeforeunload = false;
+            document.querySelectorAll('a[href^=mailto]').forEach( (element) => element.addEventListener( 'click', () => ignoreBeforeunload = true ) );
+            window.addEventListener( 'beforeunload', (event) => {
+                if (!ignoreBeforeunload)
+                    TurbolinksAnimate.disappear();
+                ignoreBeforeunload = false;
             });
         };
 
