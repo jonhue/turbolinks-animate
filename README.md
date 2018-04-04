@@ -49,6 +49,10 @@ First you need to add [turbolinks-animate.js](https://www.npmjs.com/package/turb
 import 'turbolinks-animate';
 ```
 
+```css
+@import "animate.css";
+```
+
 Then initialize it:
 
 ```javascript
