@@ -12,6 +12,6 @@
   "license": "MIT",
   "dependencies": {
     "animate.css": "^3.6.1",
-    "turbolinks": "^5.0.3"
+    "turbolinks": "^5.1.1"
   }
 }
