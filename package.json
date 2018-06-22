@@ -11,7 +11,7 @@
   "author": "Jonas Hübotter <me@jonhue.me>",
   "license": "MIT",
   "dependencies": {
-    "animate.css": "^3.5.2",
+    "animate.css": "^3.6.1",
     "turbolinks": "^5.0.3"
   }
 }
