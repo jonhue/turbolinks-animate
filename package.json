@@ -2,16 +2,23 @@
   "name": "turbolinks-animate",
   "version": "3.0.5",
   "description": "Rich & adaptive animations for apps using Turbolinks™",
-  "main": "src/turbolinks-animate.js",
+  "main": "src/index.js",
+  "homepage": "https://jonhue.me/repos/turbolinks-animate",
   "bugs": {
-    "url": "https://github.com/jonhue/turbolinks-animate.js/issues",
+    "url": "https://github.com/jonhue/turbolinks-animate/issues",
     "email": "me@jonhue.me"
   },
-  "repository": "https://github.com/jonhue/turbolinks-animate.js",
+  "repository": "https://github.com/jonhue/turbolinks-animate",
   "author": "Jonas Hübotter <me@jonhue.me>",
   "license": "MIT",
+  "scripts": {
+    "eslint": "eslint src/**/*.js"
+  },
   "dependencies": {
     "animate.css": "^3.7.0",
     "turbolinks": "^5.2.0"
+  },
+  "devDependencies": {
+    "eslint": "^5.2.0"
   }
 }
