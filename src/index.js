@@ -152,7 +152,7 @@ window.TurbolinksAnimate = window.TurbolinksAnimate || new function() {
 
   this.prepareTransition = (newBody) => {
     document.querySelectorAll('[data-turbolinks-animate-transition]').forEach((element) => {
-      let property = element.dataset.transition,
+      let property = element.dataset.turbolinksAnimateTransition,
         matchingElements = newBody.querySelectorAll(element.tagName + '[data-turbolinks-animate-transition]'),
         newElement = null;
 
@@ -169,7 +169,7 @@ window.TurbolinksAnimate = window.TurbolinksAnimate || new function() {
   };
   this.transition = () => {
     document.querySelectorAll('[data-turbolinks-animate-transition]').forEach((element) => {
-      setTimeout(() => element.style[cssPropertyToCamelCase(element.dataset.transition)] = null, 1);
+      setTimeout(() => element.style[cssPropertyToCamelCase(element.dataset.turbolinksAnimateTransition)] = null, 1);
     });
   };
 
