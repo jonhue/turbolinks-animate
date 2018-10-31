@@ -49,70 +49,72 @@ The vital part is choosing an animation to play. Turbolinks Animate utilizes Ani
 
 <details>
   <summary>Full list of animations</summary>
-  * `fadeIn`
-  * `fadeInUp`
-  * `fadeInDown`
-  * `fadeInRight`
-  * `fadeInLeft`
-  * `fadeInUpBig`
-  * `fadeInDownBig`
-  * `fadeInRightBig`
-  * `fadeInLeftBig`
-  * `fadeOut`
-  * `fadeOutUp`
-  * `fadeOutDown`
-  * `fadeOutRight`
-  * `fadeOutLeft`
-  * `fadeOutUpBig`
-  * `fadeOutDownBig`
-  * `fadeOutRightBig`
-  * `fadeOutLeftBig`
-  * `bounceIn`
-  * `bounceInUp`
-  * `bounceInDown`
-  * `bounceInRight`
-  * `bounceInLeft`
-  * `bounceOut`
-  * `bounceOutUp`
-  * `bounceOutDown`
-  * `bounceOutRight`
-  * `bounceOutLeft`
-  * `flipInX`
-  * `flipInY`
-  * `flipOutX`
-  * `flipOutY`
-  * `lightSpeedIn`
-  * `lightSpeedOut`
-  * `rotateIn`
-  * `rotateInDownLeft`
-  * `rotateInDownRight`
-  * `rotateInUpRight`
-  * `rotateInUpLeft`
-  * `rotateOut`
-  * `rotateOutDownLeft`
-  * `rotateOutDownRight`
-  * `rotateOutUpRight`
-  * `rotateOutUpLeft`
-  * `rollIn`
-  * `rollOut`
-  * `zoomIn`
-  * `zoomInUp`
-  * `zoomInDown`
-  * `zoomInRight`
-  * `zoomInLeft`
-  * `zoomOut`
-  * `zoomOutUp`
-  * `zoomOutDown`
-  * `zoomOutRight`
-  * `zoomOutLeft`
-  * `slideInUp`
-  * `slideInDown`
-  * `slideInRight`
-  * `slideInLeft`
-  * `slideOutUp`
-  * `slideOutDown`
-  * `slideOutRight`
-  * `slideOutLeft`
+  <ul>
+    <li><code>fadeIn</code></li>
+    <li><code>fadeInUp</code></li>
+    <li><code>fadeInDown</code></li>
+    <li><code>fadeInRight</code></li>
+    <li><code>fadeInLeft</code></li>
+    <li><code>fadeInUpBig</code></li>
+    <li><code>fadeInDownBig</code></li>
+    <li><code>fadeInRightBig</code></li>
+    <li><code>fadeInLeftBig</code></li>
+    <li><code>fadeOut</code></li>
+    <li><code>fadeOutUp</code></li>
+    <li><code>fadeOutDown</code></li>
+    <li><code>fadeOutRight</code></li>
+    <li><code>fadeOutLeft</code></li>
+    <li><code>fadeOutUpBig</code></li>
+    <li><code>fadeOutDownBig</code></li>
+    <li><code>fadeOutRightBig</code></li>
+    <li><code>fadeOutLeftBig</code></li>
+    <li><code>bounceIn</code></li>
+    <li><code>bounceInUp</code></li>
+    <li><code>bounceInDown</code></li>
+    <li><code>bounceInRight</code></li>
+    <li><code>bounceInLeft</code></li>
+    <li><code>bounceOut</code></li>
+    <li><code>bounceOutUp</code></li>
+    <li><code>bounceOutDown</code></li>
+    <li><code>bounceOutRight</code></li>
+    <li><code>bounceOutLeft</code></li>
+    <li><code>flipInX</code></li>
+    <li><code>flipInY</code></li>
+    <li><code>flipOutX</code></li>
+    <li><code>flipOutY</code></li>
+    <li><code>lightSpeedIn</code></li>
+    <li><code>lightSpeedOut</code></li>
+    <li><code>rotateIn</code></li>
+    <li><code>rotateInDownLeft</code></li>
+    <li><code>rotateInDownRight</code></li>
+    <li><code>rotateInUpRight</code></li>
+    <li><code>rotateInUpLeft</code></li>
+    <li><code>rotateOut</code></li>
+    <li><code>rotateOutDownLeft</code></li>
+    <li><code>rotateOutDownRight</code></li>
+    <li><code>rotateOutUpRight</code></li>
+    <li><code>rotateOutUpLeft</code></li>
+    <li><code>rollIn</code></li>
+    <li><code>rollOut</code></li>
+    <li><code>zoomIn</code></li>
+    <li><code>zoomInUp</code></li>
+    <li><code>zoomInDown</code></li>
+    <li><code>zoomInRight</code></li>
+    <li><code>zoomInLeft</code></li>
+    <li><code>zoomOut</code></li>
+    <li><code>zoomOutUp</code></li>
+    <li><code>zoomOutDown</code></li>
+    <li><code>zoomOutRight</code></li>
+    <li><code>zoomOutLeft</code></li>
+    <li><code>slideInUp</code></li>
+    <li><code>slideInDown</code></li>
+    <li><code>slideInRight</code></li>
+    <li><code>slideInLeft</code></li>
+    <li><code>slideOutUp</code></li>
+    <li><code>slideOutDown</code></li>
+    <li><code>slideOutRight</code></li>
+    <li><code>slideOutLeft</code></li>
+  </ul>
 </details>
 
 There are three ways in which you can specify the animation you want to use. To choose a globally used animation pass an option when initializing Turbolinks Animate:
