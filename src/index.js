@@ -110,6 +110,12 @@ window.TurbolinksAnimate = window.TurbolinksAnimate || new function() {
           TurbolinksAnimate.disappear();
         ignoreBeforeunload = false;
       });
+      document.addEventListener('turbolinks:before-render', (event) => {
+        TurbolinksAnimate.prepareTransition(event.data.newBody);
+      });
+      document.addEventListener('turbolinks:render', () => {
+        TurbolinksAnimate.transition();
+      });
     }
 
     document.querySelectorAll('a, button').forEach((element) => {
@@ -142,6 +148,29 @@ window.TurbolinksAnimate = window.TurbolinksAnimate || new function() {
       previousType: previousType,
       appear: appear
     };
+  };
+
+  this.prepareTransition = (newBody) => {
+    document.querySelectorAll('[data-turbolinks-animate-transition]').forEach((element) => {
+      let property = element.dataset.turbolinksAnimateTransition,
+        matchingElements = newBody.querySelectorAll(element.tagName + '[data-turbolinks-animate-transition]'),
+        newElement = null;
+
+      if (matchingElements.length == 1) {
+        newElement = matchingElements[0];
+      } else if (matchingElements.length > 1) {
+        newElement = newBody.querySelector('#' + element.id);
+      } else {
+        return;
+      }
+
+      newElement.style[cssPropertyToCamelCase(property)] = getComputedStyle(element).getPropertyValue(property);
+    });
+  };
+  this.transition = () => {
+    document.querySelectorAll('[data-turbolinks-animate-transition]').forEach((element) => {
+      setTimeout(() => element.style[cssPropertyToCamelCase(element.dataset.turbolinksAnimateTransition)] = null, 1);
+    });
   };
 
   this.appear = () => {
@@ -297,4 +326,8 @@ function extend() {
       if (arguments[i].hasOwnProperty(key))
         arguments[0][key] = arguments[i][key];
   return arguments[0];
+}
+
+function cssPropertyToCamelCase(property) {
+  return property.replace(/-([a-z])/gi, (s, group1) => group1.toUpperCase());
 }

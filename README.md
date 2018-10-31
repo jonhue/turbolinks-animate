@@ -20,6 +20,7 @@ A dead simple & powerful way of adding rich & adaptive animations to your app wh
   * [Overriding animations](#overriding-animations)
   * [Persistent elements](#persistent-elements)
   * [Animation types](#animation-types)
+  * [Element transitions](#element-transitions)
   * [Events](#events)
 * [To Do](#to-do)
 * [Contributing](#contributing)
@@ -120,7 +121,7 @@ The vital part is choosing an animation to play. Turbolinks Animate utilizes Ani
 There are three ways in which you can specify the animation you want to use. To choose a globally used animation pass an option when initializing Turbolinks Animate:
 
 ```javascript
-TurbolinksAnimate.init({ animation: 'fadeinright' });
+TurbolinksAnimate.init({animation: 'fadeinright'});
 ```
 
 **Note:** The option falls back to `fadein`.
@@ -144,7 +145,7 @@ For alternate approaches take a look at [inline animations](#inline-animations) 
 #### Example:
 
 ```javascript
-TurbolinksAnimate.init({ animation: 'fadeinright', duration: '1s', delay: 1000 });
+TurbolinksAnimate.init({animation: 'fadeinright', duration: '1s', delay: 1000});
 ```
 
 ### Inline animations
@@ -170,7 +171,7 @@ With Turbolinks Animate you are able to set animations based on the links, who g
 In addition you can specify animations specifically for certain screen sizes, just pass a hash:
 
 ```javascript
-TurbolinksAnimate.init({ animation: { 'mobile': 'fadeinup', 'tablet': 'fadeindown', 'desktop': 'fadein' } });
+TurbolinksAnimate.init({animation: {'mobile': 'fadeinup', 'tablet': 'fadeindown', 'desktop': 'fadein'}});
 ```
 
 **Note:** You can customize the breakpoints through the [options](#options).
@@ -222,6 +223,34 @@ Often your permanent elements depend on the hyperlink clicked. Just specify the 
   <a href="/doo">Don't persist navigation!</a>
 </body>
 ```
+
+### Element transitions
+
+In a lot of cases it can be useful to apply custom CSS transitions to specific elements when the page changes. This works especially well with background colors of persisted elements, but can be used for any CSS property on any element.
+
+```html
+<header data-turbolinks-animate-persist-itself="true" data-turbolinks-animate-transition="background-color">
+  <!-- ... -->
+</header>
+```
+
+```css
+header {
+  transition: 0.25s background-color ease-out;
+}
+
+#page1 header {
+  background-color: blue;
+}
+
+#page2 header {
+  background-color: red;
+}
+```
+
+When you have a third page, which doesn't contain a `header` element, the page transition performs normally as this method only applies when Turbolinks Animate can find a matching element on the new page.
+
+**Important:** Unless you only use this data attribute for elements that can be distinguished by their HTML tag, you have to declare an id.
 
 ### Events
 
