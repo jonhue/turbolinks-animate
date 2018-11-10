@@ -242,22 +242,10 @@ window.TurbolinksAnimate = window.TurbolinksAnimate || new function() {
         return;
       event.currentTarget.dataset.triggered = true;
 
-      if (window.CustomEvent) {
-        let event = new CustomEvent('turbolinks:animation-end', {detail: {element: TurbolinksAnimate.element, disappearing: TurbolinksAnimate.disappearing}});
-      } else {
-        let event = document.createEvent('CustomEvent');
-        event.initCustomEvent('turbolinks:animation-end', true, true, {element: TurbolinksAnimate.element, disappearing: TurbolinksAnimate.disappearing});
-      }
-      document.dispatchEvent(event);
+      dispatchEvent('turbolinks:animation-end', {detail: {element: TurbolinksAnimate.element, disappearing: TurbolinksAnimate.disappearing}});
     });
 
-    if (window.CustomEvent) {
-      let event = new CustomEvent('turbolinks:animation-start', {detail: {element: TurbolinksAnimate.element, disappearing: TurbolinksAnimate.disappearing, animation: animation}});
-    } else {
-      let event = document.createEvent('CustomEvent');
-      event.initCustomEvent('turbolinks:animation-start', true, true, {element: TurbolinksAnimate.element, disappearing: TurbolinksAnimate.disappearing, animation: animation});
-    }
-    document.dispatchEvent(event);
+    dispatchEvent('turbolinks:animation-start', {detail: {element: TurbolinksAnimate.element, disappearing: TurbolinksAnimate.disappearing, animation: animation}});
 
     TurbolinksAnimate.elements.forEach((element) => {
       element.addEventListener('webkitAnimationEnd mozAnimationEnd oAnimationEnd oanimationend animationend', () => {
@@ -319,6 +307,11 @@ window.TurbolinksAnimate = window.TurbolinksAnimate || new function() {
   };
 };
 
+
+function dispatchEvent(name, options = {}) {
+  let event = new Event(name, options);
+  document.dispatchEvent(event);
+}
 
 function extend() {
   for (let i = 1; i < arguments.length; i++)
