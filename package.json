@@ -1,6 +1,6 @@
 {
   "name": "turbolinks-animate",
-  "version": "3.1.0",
+  "version": "3.1.1",
   "description": "Rich & adaptive animations for apps using Turbolinks™",
   "main": "src/index.js",
   "homepage": "https://jonhue.me/repos/turbolinks-animate",
