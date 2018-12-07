@@ -164,12 +164,22 @@ window.TurbolinksAnimate = window.TurbolinksAnimate || new function() {
         return;
       }
 
-      newElement.style[cssPropertyToCamelCase(property)] = getComputedStyle(element).getPropertyValue(property);
+      let properties = property.split(',');
+      for (var i = 0; i < properties.length; i++) {
+        newElement.style[cssPropertyToCamelCase(properties[i])] = getComputedStyle(element).getPropertyValue(properties[i]);
+      }
     });
   };
+  
   this.transition = () => {
     document.querySelectorAll('[data-turbolinks-animate-transition]').forEach((element) => {
-      setTimeout(() => element.style[cssPropertyToCamelCase(element.dataset.turbolinksAnimateTransition)] = null, 1);
+      setTimeout(() => {
+        let property = element.dataset.turbolinksAnimateTransition;
+        let properties = property.split(',');
+        for (var i = 0; i < properties.length; i++) {
+          element.style[cssPropertyToCamelCase(properties[i])] = null;
+        }
+      }, 1);
     });
   };
 
