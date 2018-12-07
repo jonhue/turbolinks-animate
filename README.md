@@ -226,10 +226,10 @@ Often your permanent elements depend on the hyperlink clicked. Just specify the 
 
 ### Element transitions
 
-In a lot of cases it can be useful to apply custom CSS transitions to specific elements when the page changes. This works especially well with background colors of persisted elements, but can be used for any CSS property on any element.
+In a lot of cases it can be useful to apply custom CSS transitions to specific elements when the page changes. This works especially well with background colors of persisted elements, but can be used for any CSS property on any element. Multiple properties can be transitioned using using comma separated values.
 
 ```html
-<header data-turbolinks-animate-persist-itself="true" data-turbolinks-animate-transition="background-color">
+<header data-turbolinks-animate-persist-itself="true" data-turbolinks-animate-transition="background-color,opacity">
   <!-- ... -->
 </header>
 ```
