@@ -175,7 +175,7 @@ window.TurbolinksAnimate = window.TurbolinksAnimate || new function() {
     document.querySelectorAll('[data-turbolinks-animate-transition]').forEach((element) => {
       setTimeout(() => {
         let property = element.dataset.turbolinksAnimateTransition;
-        let properties = property.split(',');
+        let properties = element.dataset.turbolinksAnimateTransition.split(',');
         for (var i = 0; i < properties.length; i++) {
           element.style[cssPropertyToCamelCase(properties[i])] = null;
         }
