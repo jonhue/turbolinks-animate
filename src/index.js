@@ -164,9 +164,9 @@ window.TurbolinksAnimate = window.TurbolinksAnimate || new function() {
         return;
       }
 
-      properties.forEach(() => {
-        newElement.style[cssPropertyToCamelCase(properties[i])] = getComputedStyle(element).getPropertyValue(properties[i]);
-      }
+      properties.forEach((property) => {
+        newElement.style[cssPropertyToCamelCase(property)] = getComputedStyle(element).getPropertyValue(property);
+      });
     });
   };
   
@@ -174,9 +174,9 @@ window.TurbolinksAnimate = window.TurbolinksAnimate || new function() {
     document.querySelectorAll('[data-turbolinks-animate-transition]').forEach((element) => {
       setTimeout(() => {
         let properties = element.dataset.turbolinksAnimateTransition.split(',');
-        for (var i = 0; i < properties.length; i++) {
-          element.style[cssPropertyToCamelCase(properties[i])] = null;
-        }
+        properties.forEach((property) => {
+          element.style[cssPropertyToCamelCase(property)] = null;
+        });
       }, 1);
     });
   };
