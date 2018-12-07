@@ -165,7 +165,7 @@ window.TurbolinksAnimate = window.TurbolinksAnimate || new function() {
       }
 
       let properties = property.split(',');
-      for (var i = 0; i < properties.length; i++) {
+      properties.forEach(() => {
         newElement.style[cssPropertyToCamelCase(properties[i])] = getComputedStyle(element).getPropertyValue(properties[i]);
       }
     });
