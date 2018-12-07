@@ -152,7 +152,7 @@ window.TurbolinksAnimate = window.TurbolinksAnimate || new function() {
 
   this.prepareTransition = (newBody) => {
     document.querySelectorAll('[data-turbolinks-animate-transition]').forEach((element) => {
-      let property = element.dataset.turbolinksAnimateTransition,
+      let properties = element.dataset.turbolinksAnimateTransition.split(','),
         matchingElements = newBody.querySelectorAll(element.tagName + '[data-turbolinks-animate-transition]'),
         newElement = null;
 
@@ -164,7 +164,6 @@ window.TurbolinksAnimate = window.TurbolinksAnimate || new function() {
         return;
       }
 
-      let properties = property.split(',');
       properties.forEach(() => {
         newElement.style[cssPropertyToCamelCase(properties[i])] = getComputedStyle(element).getPropertyValue(properties[i]);
       }
@@ -174,7 +173,6 @@ window.TurbolinksAnimate = window.TurbolinksAnimate || new function() {
   this.transition = () => {
     document.querySelectorAll('[data-turbolinks-animate-transition]').forEach((element) => {
       setTimeout(() => {
-        let property = element.dataset.turbolinksAnimateTransition;
         let properties = element.dataset.turbolinksAnimateTransition.split(',');
         for (var i = 0; i < properties.length; i++) {
           element.style[cssPropertyToCamelCase(properties[i])] = null;
