@@ -152,7 +152,7 @@ window.TurbolinksAnimate = window.TurbolinksAnimate || new function() {
 
   this.prepareTransition = (newBody) => {
     document.querySelectorAll('[data-turbolinks-animate-transition]').forEach((element) => {
-      let property = element.dataset.turbolinksAnimateTransition,
+      let properties = element.dataset.turbolinksAnimateTransition.split(','),
         matchingElements = newBody.querySelectorAll(element.tagName + '[data-turbolinks-animate-transition]'),
         newElement = null;
 
@@ -164,12 +164,20 @@ window.TurbolinksAnimate = window.TurbolinksAnimate || new function() {
         return;
       }
 
-      newElement.style[cssPropertyToCamelCase(property)] = getComputedStyle(element).getPropertyValue(property);
+      properties.forEach((property) => {
+        newElement.style[cssPropertyToCamelCase(property)] = getComputedStyle(element).getPropertyValue(property);
+      });
     });
   };
+  
   this.transition = () => {
     document.querySelectorAll('[data-turbolinks-animate-transition]').forEach((element) => {
-      setTimeout(() => element.style[cssPropertyToCamelCase(element.dataset.turbolinksAnimateTransition)] = null, 1);
+      setTimeout(() => {
+        let properties = element.dataset.turbolinksAnimateTransition.split(',');
+        properties.forEach((property) => {
+          element.style[cssPropertyToCamelCase(property)] = null;
+        });
+      }, 1);
     });
   };
 
