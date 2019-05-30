@@ -15,7 +15,7 @@
     "eslint": "eslint src/**/*.js"
   },
   "dependencies": {
-    "animate.css": "^3.7.0",
+    "animate.css": "^3.7.1",
     "turbolinks": "^5.2.0"
   },
   "devDependencies": {
