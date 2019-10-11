@@ -22,6 +22,7 @@ A dead simple & powerful way of adding rich & adaptive animations to your app wh
   * [Animation types](#animation-types)
   * [Element transitions](#element-transitions)
   * [Events](#events)
+* [Release](#release)
 * [To Do](#to-do)
 * [Contributing](#contributing)
   * [Semantic Versioning](#semantic-versioning)
@@ -259,6 +260,31 @@ Turbolinks Animate emits events that allow you to track the animation lifecycle.
 * `turbolinks:animation-start` fires when an animation starts. The main Turbolinks Animate element can be accessed with `event.data.element`. Access the animation with `event.data.animation`. Access whether content appears or disappears with `event.data.disappearing`.
 
 * `turbolinks:animation-end` fires when an animation ends. The main Turbolinks Animate element can be accessed with `event.data.element`. Access whether content appeared or disappeared with `event.data.disappearing`.
+
+---
+
+## Testing
+
+1. Fork this repository
+2. Clone your forked git locally
+3. Install dependencies
+
+    `$ yarn install`
+
+4. Run ESLint
+
+    `$ yarn eslint`
+
+---
+
+## Release
+
+1. Review breaking changes and deprecations in `CHANGELOG.md`
+2. Change the gem version in `package.json`
+3. Reset `CHANGELOG.md`
+4. Create a pull request to merge the changes into `master`
+5. After the pull request was merged, create a new release listing the breaking changes and commits on `master` since the last release.
+6. The release workflow will publish the package to NPM and GPR
 
 ---
 
