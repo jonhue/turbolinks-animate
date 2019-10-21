@@ -279,12 +279,12 @@ Turbolinks Animate emits events that allow you to track the animation lifecycle.
 
 ## Release
 
-1. Review breaking changes and deprecations in `CHANGELOG.md`
-2. Change the gem version in `package.json`
-3. Reset `CHANGELOG.md`
-4. Create a pull request to merge the changes into `master`
-5. After the pull request was merged, create a new release listing the breaking changes and commits on `master` since the last release.
-6. The release workflow will publish the package to NPM and GPR
+1. Review breaking changes and deprecations in `CHANGELOG.md`.
+1. Change the version in `package.json`.
+1. Reset `CHANGELOG.md`.
+1. Create a pull request to merge the changes into `master`.
+1. After the pull request was merged, create a new release listing the breaking changes and commits on `master` since the last release.
+1. The release workflow will publish the package to NPM and GPR.
 
 ---
 
