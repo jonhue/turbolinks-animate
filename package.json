@@ -11,6 +11,9 @@
   "repository": "https://github.com/jonhue/turbolinks-animate",
   "author": "Jonas Hübotter <me@jonhue.me>",
   "license": "MIT",
+  "engines": {
+    "node": "8 || >=10"
+  },
   "scripts": {
     "eslint": "eslint src/**/*.js"
   },
