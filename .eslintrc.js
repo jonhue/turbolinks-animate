@@ -26,6 +26,7 @@ module.exports = {
       "always"
     ],
     "no-undef": 1,
-    "no-unused-vars": 1
+    "no-unused-vars": 1,
+    "no-prototype-builtins": 1
   }
 };
