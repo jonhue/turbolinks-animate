@@ -78,7 +78,7 @@ window.TurbolinksAnimate = window.TurbolinksAnimate || new function() {
   this.init = (options) => {
     let defaults = {
       element: document.querySelector('body'),
-      animation: 'fadein',
+      animation: 'fadeIn',
       duration: '0.3s',
       delay: false,
       reversedDisappearing: false,
@@ -169,7 +169,7 @@ window.TurbolinksAnimate = window.TurbolinksAnimate || new function() {
       });
     });
   };
-  
+
   this.transition = () => {
     document.querySelectorAll('[data-turbolinks-animate-transition]').forEach((element) => {
       setTimeout(() => {
@@ -303,12 +303,12 @@ window.TurbolinksAnimate = window.TurbolinksAnimate || new function() {
       if (animation.disappear != true)
         animation = TurbolinksAnimate.animations.filter(object => object.name.toLowerCase() == animation.disappear.toLowerCase())[0];
       if (TurbolinksAnimate.options.reversedDisappearing && animation.reverse != null) {
-        classList.push(animation.reverse);
+        classList.push(`animate__${animation.reverse}`);
       } else {
-        classList.push(animation.name);
+        classList.push(`animate__${animation.name}`);
       }
     } else {
-      classList.push(animation.name);
+      classList.push(`animate__${animation.name}`);
     }
 
     return classList;
