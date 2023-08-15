@@ -10,7 +10,7 @@ jobs:
     name: GPR
     steps:
     - uses: actions/checkout@master
-    - uses: actions/setup-node@v3.7.0
+    - uses: actions/setup-node@v3.8.0
       with:
         node-version: 12
         registry-url: https://npm.pkg.github.com/
@@ -24,7 +24,7 @@ jobs:
     name: NPM
     steps:
     - uses: actions/checkout@master
-    - uses: actions/setup-node@v3.7.0
+    - uses: actions/setup-node@v3.8.0
       with:
         node-version: 12
         registry-url: https://registry.npmjs.org/
